@@ -10,7 +10,7 @@ var sys = require('./lib/sys')
 
 
 var port = process.env.PORT || 9000
-var dbUrl = process.env.DB_URL ||  'redis://127.0.0.1:6379/0'
+var dbUrl = process.env.REDIS_URL ||  'redis://127.0.0.1:6379/0'
 
 
 var usersModel = require('./lib/usersModelRedis')
