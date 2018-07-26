@@ -1,0 +1,11 @@
+{
+    "admin": {
+        "pwd": "admin",
+        "allowedApps": {
+            "agents": true,
+            "clients": true,
+            "master": true,
+            "users": true
+        }
+    }
+}
