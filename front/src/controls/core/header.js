@@ -1,6 +1,6 @@
 
 $$.registerControlEx('HeaderControl', {
-	//deps: ['WebSocketService'],
+	deps: ['WebSocketService'],
 	options: {
 		title: 'Hello World',
 		userName: 'unknown'
@@ -18,7 +18,7 @@ $$.registerControlEx('HeaderControl', {
 		})
 
 
-/*		client.events.on('connect', function() {
+		client.events.on('connect', function() {
 			console.log('[HeaderControl] client connected')
 			ctrl.setData({connected: true, titleState: "WebSocket connected"})
 
@@ -28,7 +28,7 @@ $$.registerControlEx('HeaderControl', {
 			console.log('[HeaderControl] client disconnected')
 			ctrl.setData({connected: false, titleState: "WebSocket disconnected"})
 
-		})*/
+		})
 	}
 
 });
