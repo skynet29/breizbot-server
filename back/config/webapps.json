@@ -505,14 +505,6 @@
             ]
         }
     },
-    "test-aframe": {
-        "props": {
-            "title": "VR Test",
-            "scripts": [
-                "/aframe.js"
-            ]
-        }
-    },
     "test-controls": {
         "props": {
             "scripts": [

@@ -233,7 +233,8 @@
 	$$.registerService('WebSocketService', function(config) {
 		const options = {
 			port: config.port || 8090,
-			host: config.host || location.hostname
+			host: 'com.breizbot.ovh'
+			//host: config.host || location.hostname
 		}
 
 		var id = (config.id || 'WebSocket') + (Date.now() % 100000)
