@@ -1,13 +1,26 @@
 .mainPanel {
 	display: flex;
 	flex-direction: row;
+	padding: 0;
 }
 
 .mainPanel > div {
 	flex: 1;
-	margin: 20px;
+	//margin: 20px;
+	//padding: 10px;
+}
+
+.toolbar {
+	border-top: 1px solid white;
+	background-color: black;
+	color: white;
 	padding: 10px;
 }
 
-
+.backBtn {
+	border: 2px solid white;
+	border-radius: 50%;
+	background-color: transparent;
+	color: white;
+}
 

@@ -51,19 +51,30 @@
 				var allowedApps = {}
 				ctrl.scope.tbody.find('tr').each(function() {
 					var appInfos = $(this).getFormData()
-					console.log('appInfos', appInfos)
+					//console.log('appInfos', appInfos)
 					if (appInfos.enabled) {
 						allowedApps[appInfos.name] = (appInfos.config == 'none') ? true : appInfos.config
 					}
 				})
-				return {
+				var ret = {
 					pwd: infos.pwd,
 					allowedApps: allowedApps
 				}
+
+				if (infos.masterActivated) {
+					ret.master = {
+						host: infos.masterHost,
+						port: infos.masterPort
+					}
+				}
+
+				return ret
 			}
 
 			function getUserDetails(user) {
 				http.get(`/api/users/${user}`).then(function(userDetails) {
+
+					console.log('userDetails', userDetails)
 
 					var allowedApps = userDetails.allowedApps
 
@@ -79,13 +90,24 @@
 							configs: ['none'].concat(item.value)
 						}
 					})	
-								
-					ctrl.setData({
+
+					var data = {
 						user: user,
 						pwd: userDetails.pwd,
 						visible: true,
-						apps: apps
-					})
+						apps: apps,
+						masterActivated: false
+					}
+
+					var master = userDetails.master
+
+					if (typeof master == 'object') {
+						data.masterActivated = true
+						data.masterPort = master.port
+						data.masterHost = master.host
+					}
+								
+					ctrl.setData(data)
 
 				})			
 			}

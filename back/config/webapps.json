@@ -567,7 +567,8 @@
             "tileIcon": "fa fa-2x fa-users",
             "title": "Users Managment",
             "scripts": [
-                "/controls/sys.js"
+                "/controls/sys.js",
+                "/controls/ui.js"
             ],
             "log": true
         }

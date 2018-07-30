@@ -2,20 +2,14 @@
 
 	class WebSocketClient {
 
-		constructor(id, options) {
+		constructor(options) {
 			this.sock = null
-			this.id = id
 			this.isConnected = false
 			this.topics = new EventEmitter2({wildcard: true})
 			this.services = new EventEmitter2()
 			this.events = new EventEmitter2()
 
-			options = options || {}
-
-			const port = options.port || 8090
-			const host = options.host || '127.0.0.1'
-
-			this.url = `wss://${host}:${port}/${id}`
+			this.options = options
 
 			this.registeredTopics = {}
 			this.registeredServices = {}
@@ -39,9 +33,19 @@
 		}
 
 		connect() {
+			const {port, host, id} = this.options
+
+			if (!port || !host) {
+				console.warn('Websocket not configured !')
+				return
+				}
+
+
+			const url = `wss://${host}:${port}/${id}`
+
 			console.log('try to connect...')
 
-			var sock = new WebSocket(this.url)
+			var sock = new WebSocket(url)
 	
 			sock.addEventListener('open', () => {
 				console.log("Connected to Master")
@@ -231,15 +235,9 @@
 
 
 	$$.registerService('WebSocketService', function(config) {
-		const options = {
-			port: config.port || 8090,
-			host: 'com.breizbot.ovh'
-			//host: config.host || location.hostname
-		}
 
-		var id = (config.id || 'WebSocket') + (Date.now() % 100000)
 
-		const client = new WebSocketClient(id, options)
+		const client = new WebSocketClient(config)
 		client.connect()
 
 		return client;

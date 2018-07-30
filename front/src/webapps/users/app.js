@@ -3,19 +3,19 @@ $$.configReady(function () {
 
 	var ctrl = $$.viewController('body', {
 		template: {gulp_inject: './app.html'},
+		data: {
+			showDetails: false
+		},
 		events: {
+			onBack: function() {
+				ctrl.setData({showDetails: false})
+			},
 			onUserSelected: function(user) {
 				console.log('userSelected', user)
 				ctrl.scope.userDetailsCtrl.setUser(user)
-			},
-
-			onUserDeleted: function(user) {
-				console.log('userDeleted', user)
-				if (ctrl.scope.userDetailsCtrl.getUser() === user) {
-					ctrl.scope.userDetailsCtrl.hide()
-				}
-				
-			}	
+				ctrl.setData({showDetails: true, user})
+			}
+	
 		}	
 	})
 

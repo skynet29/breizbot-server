@@ -25,6 +25,7 @@ module.exports = function(app) {
 				req.session.allowedApps = userInfo.allowedApps
 
 				req.session.user = user
+				req.session.masterInfo = userInfo.master
 				res.redirect('/')
 /*				sendStatus()
 */			}

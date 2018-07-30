@@ -48,7 +48,21 @@ $(function() {
 		$.getJSON(`/api/users/config/${appName}`)
 		.then(function(config) {
 
-			$$.configureService('WebSocketService', {id: appName + '.' + config.$userName + '.'})
+			console.log('config', config)
+
+			var masterInfo = config.$masterInfo
+
+			if (masterInfo) {
+				var options = {
+					id: appName + '.' + config.$userName + '.' + (Date.now() % 100000),
+					port: masterInfo.port,
+					host: masterInfo.host
+				}
+
+				$$.configureService('WebSocketService', options)
+			}
+
+			
 			$('body').processControls() // process HeaderControl
 			
 			try {

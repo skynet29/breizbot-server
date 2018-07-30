@@ -1,35 +1,54 @@
 <div class="main" bn-show="visible">
 
-	<h2>User Details</h2>
-	<table class="info w3-table w3-border" bn-bind="info">
-		<tr>
-			<td>User</td>
-			<td><strong bn-text="user"></strong></td>
-		</tr>
-		<tr>
-			<td>Password</td>
-			<td><input class="pwd w3-input w3-border" type="text" bn-val="pwd" name="pwd"></td>
-		</tr>
-	</table>				
-
-	<div class="scrollPanel">
-		<table class="apps w3-table-all w3-small">
-			<thead>
-				<tr class="w3-green">
-					<th>App Name</th>
-					<th>Allowed</th>
-					<th>Configuration</th>			
+	<div bn-control="TabControl" style="height: 100%; display: flex; flex-direction: column;">
+		<div title="Info" style="flex: 1">
+			<table class="info w3-table w3-border" bn-bind="info">
+				<tr>
+					<td>User</td>
+					<td><strong bn-text="user"></strong></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input class="pwd w3-input w3-border" type="text" bn-val="pwd" name="pwd"></td>
 				</tr>
 
-			</thead>
-			<tbody bn-each="app of apps" bn-bind="tbody">
 				<tr>
-					<td bn-text="app.appName" name="name" bn-val="app.appName"></td>
-					<td><input name="enabled" type="checkbox" bn-prop="checked: app.allowed"></td>
-					<td><select name="config"  class="w3-border bn-fill" bn-list="app.configs" bn-val="app.selConfig"></select></td>
-				</tr>				
-			</tbody>
-		</table>
+					<td>Activate WebSocket</td>
+					<td><input class=w3-border" type="checkbox" bn-val="masterActivated" bn-update="change" name="masterActivated"></td>
+				</tr>
+
+				<tr bn-show="masterActivated">
+					<td>Master Host</td>
+					<td "><input class="w3-input w3-border" type="text" name="masterHost" bn-val="masterHost"></td>
+				</tr>	
+
+				<tr bn-show="masterActivated">
+					<td>Master Port</td>
+					<td "><input class="w3-input w3-border" type="number" name="masterPort" bn-val="masterPort"></td>
+				</tr>							
+
+			</table>	
+		</div>
+				
+		<div title="webapps" style="flex: 1; overflow: auto;">
+			<table class="apps w3-table-all w3-small">
+				<thead>
+					<tr class="w3-green">
+						<th>App Name</th>
+						<th>Allowed</th>
+						<th>Configuration</th>			
+					</tr>
+
+				</thead>
+				<tbody bn-each="app of apps" bn-bind="tbody">
+					<tr>
+						<td bn-text="app.appName" name="name" bn-val="app.appName"></td>
+						<td><input name="enabled" type="checkbox" bn-prop="checked: app.allowed"></td>
+						<td><select name="config"  class="w3-border bn-fill" bn-list="app.configs" bn-val="app.selConfig"></select></td>
+					</tr>				
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<p><button class="apply w3-btn w3-blue" bn-event="click: onApply">Apply changes</button></p>
 </div>

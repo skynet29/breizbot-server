@@ -1,4 +1,11 @@
  <div class="mainPanel">
-    <div bn-control="UsersControl" class="w3-card-4 w3-light-grey" bn-event="userSelected: onUserSelected, userDeleted: onUserDeleted"></div>
-    <div bn-control="UserDetailsControl" class="w3-card-4 w3-light-grey" bn-iface="userDetailsCtrl"></div>
+    <div bn-control="UsersControl" bn-event="userSelected: onUserSelected" bn-show="!showDetails" style="margin: 5px;"></div>
+    <div bn-show="showDetails" style="display: flex; flex-direction: column;">
+    	<div class="toolbar" style="display: flex; justify-content: space-between">
+    		<button class="backBtn" title="back" bn-event="click: onBack"><i class="fa fa-arrow-left"></i></button>
+    		<div>User&nbsp;<strong bn-text="user"></strong></div>
+    	</div>
+	    <div bn-control="UserDetailsControl" bn-iface="userDetailsCtrl" style="flex: 1; margin: 5px;display: flex; flex-direction: column;"></div>
+    	
+    </div>
 </div>

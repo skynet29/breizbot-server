@@ -3,6 +3,6 @@
 	"tileColor": "w3-green",
 	"tileIcon": "fa fa-2x fa-users",
 	"title": "Users Managment",
-	"scripts": ["/controls/sys.js"],
+	"scripts": ["/controls/sys.js", "/controls/ui.js"],
 	"log": true	
 }

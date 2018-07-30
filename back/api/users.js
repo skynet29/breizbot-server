@@ -88,6 +88,7 @@ routes.get('/config/:appName', function(req, res) {
 	})
 	.then((config) => {
 		config.$userName = userName
+		config.$masterInfo = req.session.masterInfo
 		res.json(config)
 	})
 	.catch((e) => {
