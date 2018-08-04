@@ -1,2 +1,8 @@
 node_modules
+back/config/certif
+back/config/users.json
+back/config/users/*
+
+
+
 
