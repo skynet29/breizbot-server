@@ -1,20 +1,27 @@
-<div class="bn-flex-col" style="align-items: center; padding: 10px;">
+<div class="bn-flex-col">
 
 	<div bn-show="!showPhoto">
-		<div bn-show="showBtn">
-			<button title="Take a picture" bn-event="click: onTakePhoto" ><i class="fa fa-camera fa-2x"></i></button>
+		<div bn-show="showBtn" class="toolbar">
+			<button title="Take a picture" bn-event="click: onTakePhoto" ><i class="fa fa-camera"></i></button>
+		</div>
+
+		<div class="contentPanel">
+			<div bn-control="WebcamControl" bn-iface="video" bn-event="mediaReady: onMediaReady"></div>
 		</div>
 		
-		<div bn-control="WebcamControl" bn-iface="video" bn-event="mediaReady: onMediaReady"></div>
+		
 			
 	</div>
 
-	<div bn-show="showPhoto">
-		<div>
-			<button title="Back" bn-event="click: onBack"><i class="fa fa-2x fa-arrow-circle-left"></i></button>
-			<button title="Save Picture" bn-event="click: onSave"><i class="fa fa-2x fa-save"></i></button>
+	<div bn-show="showPhoto" >
+		<div class="toolbar">
+			<button title="Back" bn-event="click: onBack"><i class="fa fa-arrow-left"></i></button>
+			<button title="Save Picture" bn-event="click: onSave"><i class="fa fa-save"></i></button>
 		</div>
-		<img bn-attr="src: imgUrl">
+		<div class="contentPanel">
+			<img bn-attr="src: imgUrl">
+		</div>
+		
 	</div>
 
 

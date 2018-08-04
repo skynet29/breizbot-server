@@ -21,7 +21,10 @@
             "tileIcon": "fa fa-camera fa-2x",
             "tileName": "Camera",
             "tileColor": "w3-green",
-            "title": "Camera"
+            "title": "Camera",
+            "styles": [
+                "app.css"
+            ]
         }
     },
     "clients": {

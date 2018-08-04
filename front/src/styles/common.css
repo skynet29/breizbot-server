@@ -17,7 +17,7 @@ body {
 
 
 .mainPanel {
-	padding: 10px;
+	//padding: 10px;
 	flex: 1;
 	overflow: hidden;
 	display: flex;

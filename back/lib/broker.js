@@ -134,9 +134,9 @@ class Broker {
 			break
 
 			case 'notif':
-				notifHistory[msg.topic] = msg
+				this.notifHistory[msg.topic] = msg
 				if (msg.data == undefined) {
-					delete notifHistory[msg.topic]
+					delete this.notifHistory[msg.topic]
 				}			
 				this.broadcastToSubscribers(msg)
 			break

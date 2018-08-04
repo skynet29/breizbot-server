@@ -1,0 +1,23 @@
+.MainControl .toolbar {
+	background-color: black;
+	border-top: 1px solid white;
+	padding: 5px;
+
+}
+
+.MainControl .contentPanel {
+	display: flex;
+	justify-content: space-around;
+	padding: 10px;
+}
+
+.MainControl .toolbar button {
+	border: 2px solid white;
+	border-radius: 50%;
+	background-color: transparent;
+	padding-right: 6px;
+	padding-left: 6px;
+	text-align: center;
+	color: white;
+}
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4uY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwiZmlsZSI6ImFwcC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuTWFpbkNvbnRyb2wgLnRvb2xiYXIge1xyXG5cdGJhY2tncm91bmQtY29sb3I6IGJsYWNrO1xyXG5cdGJvcmRlci10b3A6IDFweCBzb2xpZCB3aGl0ZTtcclxuXHRwYWRkaW5nOiA1cHg7XHJcblxyXG59XHJcblxyXG4uTWFpbkNvbnRyb2wgLmNvbnRlbnRQYW5lbCB7XHJcblx0ZGlzcGxheTogZmxleDtcclxuXHRqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcclxuXHRwYWRkaW5nOiAxMHB4O1xyXG59XHJcblxyXG4uTWFpbkNvbnRyb2wgLnRvb2xiYXIgYnV0dG9uIHtcclxuXHRib3JkZXI6IDJweCBzb2xpZCB3aGl0ZTtcclxuXHRib3JkZXItcmFkaXVzOiA1MCU7XHJcblx0YmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XHJcblx0cGFkZGluZy1yaWdodDogNnB4O1xyXG5cdHBhZGRpbmctbGVmdDogNnB4O1xyXG5cdHRleHQtYWxpZ246IGNlbnRlcjtcclxuXHRjb2xvcjogd2hpdGU7XHJcbn0iXX0= */

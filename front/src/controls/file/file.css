@@ -43,18 +43,18 @@
 }
 
 .FileControl .toolbar button {
-	border: 2px solid black;
+	border: 2px solid white;
 	border-radius: 50%;
 	background-color: transparent;
-	padding: 0;
-	width: 45px;
-	height: 45px;
+	padding-right: 6px;
+	padding-left: 6px;
 	text-align: center;
+	color: white;
 }
 
 .FileControl button.selected {
-	background-color: black;
-	color: white;
+	background-color: white;
+	color: black;
 }
 
 .FileControl .pathPanel {
@@ -70,17 +70,24 @@
 }
 
 .FileControl .toolbar {
-	margin-bottom: 30px;
+	background-color: black;
+	border-top: 1px solid white;
+	padding: 5px;
+	display: flex;
+	justify-content: space-between;
 }
 
-.FileControl .toolbar > button {
-	margin-right: 10px;
+
+.FileControl .contentPanel {
+	padding: 10px;
 }
 
-.FileControl .toolbar > button:nth-child(2) {
+
+
+.FileControl .subToolbar > button:nth-child(2) {
 	margin-right: 40px;
 }
 
-.FileControl .toolbar > button:nth-child(6) {
+.FileControl .subToolbar > button:nth-child(6) {
 	margin-right: 40px;
 }
