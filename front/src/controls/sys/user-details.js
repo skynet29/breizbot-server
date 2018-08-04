@@ -4,17 +4,14 @@
 	$$.registerControlEx('UserDetailsControl', {
 
 		deps: ['HttpService'],
-		iface: 'setUser(userName);getUser();hide()',
+		iface: 'setUser(userName);getUser()',
 
 		init: function(elt, options, http) {
 
 			var ctrl = $$.viewController(elt, {
 				template: {gulp_inject: './user-details.html'},
 				data: {
-					user: '',
-					pwd: '',
-					apps: [],
-					visible: false
+					apps: []
 				},	
 				events: {
 					onApply: function(ev) {
@@ -23,6 +20,8 @@
 							$(this).notify('Config saved successfully', {position: 'right top', className: 'success'})
 						})					
 					}
+
+
 				}
 			})
 
@@ -32,7 +31,7 @@
 
 
 
-			http.get('/api/apps').then(function(apps) {
+			http.get('/api/app').then(function(apps) {
 				_apps = apps
 
 			})
@@ -40,6 +39,7 @@
 			this.setUser = function(id) {
 				console.log('[UserDetailsControl] setUser', id)
 				user = id
+				ctrl.scope.tabCtrl.setActive(0)
 				getUserDetails(id)
 				//mainElt.show()	
 			}
@@ -56,25 +56,18 @@
 						allowedApps[appInfos.name] = (appInfos.config == 'none') ? true : appInfos.config
 					}
 				})
-				var ret = {
-					pwd: infos.pwd,
-					allowedApps: allowedApps
-				}
+				infos.allowedApps = allowedApps
 
-				if (infos.masterActivated) {
-					ret.master = {
-						host: infos.masterHost,
-						port: infos.masterPort
-					}
-				}
 
-				return ret
+				return infos
 			}
 
 			function getUserDetails(user) {
 				http.get(`/api/users/${user}`).then(function(userDetails) {
 
 					console.log('userDetails', userDetails)
+
+					ctrl.scope.info.setFormData(userDetails)
 
 					var allowedApps = userDetails.allowedApps
 
@@ -91,33 +84,16 @@
 						}
 					})	
 
-					var data = {
-						user: user,
-						pwd: userDetails.pwd,
-						visible: true,
-						apps: apps,
-						masterActivated: false
-					}
-
-					var master = userDetails.master
-
-					if (typeof master == 'object') {
-						data.masterActivated = true
-						data.masterPort = master.port
-						data.masterHost = master.host
-					}
 								
-					ctrl.setData(data)
+					ctrl.setData({apps})
 
 				})			
 			}
 
 			this.getUser = function() {
 				return user
-			},
-			this.hide = function() {
-				ctrl.setData({visible: false})
 			}
+
 		}
 
 	})

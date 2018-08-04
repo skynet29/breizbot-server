@@ -1,0 +1,5 @@
+$$.configReady((config) => {
+
+	$$.startApp('HomeControl')
+})
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQSIsImZpbGUiOiJhcHAuanMiLCJzb3VyY2VzQ29udGVudCI6WyIkJC5jb25maWdSZWFkeSgoY29uZmlnKSA9PiB7XHJcblxyXG5cdCQkLnN0YXJ0QXBwKCdIb21lQ29udHJvbCcpXHJcbn0pIl19

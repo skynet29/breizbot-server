@@ -49,10 +49,20 @@
 
 	$.fn.setFormData = function(data) {
 
+		//console.log('setFormData', data)
+		if (this.get(0).tagName == "FORM") {
+			this.get(0).reset()
+		}
+
 		for(var name in data) {
-			var elt = this.find(`[name=${name}]`)
 			var value = data[name]
-			elt.setValue(value)
+			console.log('for', name, value)
+			var elt = this.find(`[name=${name}]`)
+			console.log('elt', elt.length)
+			if (elt.length) {
+				elt.setValue(value)				
+			}
+
 		
 		}
 
@@ -69,7 +79,7 @@
 			return this
 		}
 
-		this.bnFind('bn-form', false, function(elt, varName) {
+		this.bnFind('bn-form', true, function(elt, varName) {
 			//console.log('bn-text', varName)
 			var value = data[varName]
 			if (typeof value == 'object') {

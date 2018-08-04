@@ -1,12 +1,8 @@
 (function(){
 
-var fnConfigReady
 var curRoute
 	
-$$.configReady = function(fn) {
 
-	fnConfigReady = fn
-}
 
 $$.startApp = function(mainControlName, config) {
 	$$.viewController('body', {
@@ -27,46 +23,44 @@ function processRoute() {
 
 }	
 
-$(function() {
-
-	var appName = location.pathname.split('/')[2]
-
-	console.log(`[Core] App '${appName}' started :)`)
-	console.log('[Core] jQuery version', $.fn.jquery)
-	console.log('[Core] jQuery UI version', $.ui.version)
-
-	
+$$.configReady = function(onConfigReady) {
 
 
-	$(window).on('popstate', function(evt) {
-		//console.log('[popstate] state', evt.state)
-		processRoute()
-	})
+	$(function() {
+
+		var appName = location.pathname.split('/')[2]
+
+		console.log(`[Core] App '${appName}' started :)`)
+		console.log('[Core] jQuery version', $.fn.jquery)
+		console.log('[Core] jQuery UI version', $.ui.version)
+
+		
 
 
-	if (typeof fnConfigReady == 'function') {
-		$.getJSON(`/api/users/config/${appName}`)
+		$(window).on('popstate', function(evt) {
+			//console.log('[popstate] state', evt.state)
+			processRoute()
+		})
+
+
+		$.getJSON(`/api/app/config/${appName}`)
 		.then(function(config) {
 
 			console.log('config', config)
 
-			var masterInfo = config.$masterInfo
-
-			if (masterInfo) {
-				var options = {
-					id: appName + '.' + config.$userName + '.' + (Date.now() % 100000),
-					port: masterInfo.port,
-					host: masterInfo.host
-				}
-
-				$$.configureService('WebSocketService', options)
+			var options = {
+				userName: config.$userName,
+				appName
 			}
 
+
+			$$.configureService('WebSocketService', options)
+		
 			
 			$('body').processControls() // process HeaderControl
 			
 			try {
-				fnConfigReady(config)
+				onConfigReady(config)
 			}
 			catch(e) {
 				var html = `
@@ -92,14 +86,11 @@ $(function() {
 			`
 			$('body').html(html)
 		})				
-		
-	}
-	else {
-		console.warn('Missing function configReady !!')
-	}
+			
+	})
 	
 
-})
+}
 
 	
 })();

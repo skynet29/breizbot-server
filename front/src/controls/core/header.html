@@ -1,9 +1,22 @@
 <div >
 	<div class="brand"><h1 class="bn-xs-hide" bn-text="title"></h1> </div>
-	<div>
+	<div class="infos">
+		<div class="notification" title="notification">
+			<i class="fa fa-lg fa-bell"></i>
+			<span class="w3-badge w3-red w3-tiny" bn-text="nbNotif" bn-show="isNotifVisible"></span>			
+		</div>
+
 	    <i bn-attr="title: titleState" class="fa fa-lg connectionState" bn-class="fa-eye: connected, fa-eye-slash: !connected"></i>
-	    <i class="fa fa-user fa-lg"></i>
-	    <span bn-text="userName" class="userName"></span>
-	    <a href="/" title="home"><i class="fa fa-home fa-lg"></i></a> 
-	</div>
+
+	    <div>
+		    <i class="fa fa-user fa-lg"></i>
+		    <span bn-text="userName" class="userName"></span>	    	
+	    </div>
+
+	    <button title="logout" class="w3-btn" bn-event="click: onDisconnect" bn-show="isHomePage"><i class="fa fa-power-off fa-lg"></i></button> 
+
+	    <button title="home" class="w3-btn" bn-event="click: onGoHome" bn-show="!isHomePage"><i class="fa fa-home fa-lg"></i></button> 
+
+<!-- 	    <a href="/" title="home"><i class="fa fa-home fa-lg"></i></a> 
+ -->	</div>
 </div>

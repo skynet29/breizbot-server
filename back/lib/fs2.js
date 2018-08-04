@@ -131,7 +131,7 @@ function writeFile(filePath, content) {
 	console.log('writeFile', filePath)
 	return new Promise(function(resolve, reject) {
 		fs.writeFile(filePath, content, function(err) {
-			console.log('writeFile', err)
+			//console.log('writeFile', err)
 			if (err) {
 				reject(err)
 			}

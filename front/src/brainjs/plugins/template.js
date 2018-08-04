@@ -127,6 +127,15 @@
 		})
 	}
 	
+
+	function bnForm(ctx) {
+		//console.log('[Core] bnText', ctx)
+		getValue(ctx, ctx.dirValue, function(value) {
+			ctx.elt.setFormData(value)
+		})
+	}
+	
+
 	function bnHtml(ctx) {
 		getValue(ctx, ctx.dirValue, function(value) {
 			ctx.elt.html(value)
@@ -224,7 +233,8 @@
 		'bn-data': bnData,			
 		'bn-class': bnClass,
 		'bn-show': bnShow,
-		'bn-style': bnStyle
+		'bn-style': bnStyle,
+		'bn-form': bnForm
 	}
 
 	$.fn.setProp = function(attrName, value) {

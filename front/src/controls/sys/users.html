@@ -1,9 +1,10 @@
 <div class="bn-flex-col bn-flex-1">
 	<h3>Registered Users</h3>
 	<div class="scrollPanel">
-		<ul class="w3-ul w3-border w3-white" bn-each="user of users" bn-event="click.delete: onDeleteUser, click.user: onUserClicked" bn-bind="ul">
+		<ul class="w3-ul w3-border w3-white" bn-each="user of users" bn-event="click.delete: onDeleteUser, click.user: onUserClicked, click.notif: onNotifClicked" bn-bind="ul">
 			<li class="w3-bar" bn-data="user: user">
 				<span class="w3-button w3-right delete" title="Delete"><i class="fa fa-trash"></i></span>
+				<span class="w3-button w3-right notif" title="Send Notification"><i class="fa fa-bell"></i></span>
 				<div class="w3-bar-item">
 					<a href="#" bn-text="user" class="user"></a>
 				</div>

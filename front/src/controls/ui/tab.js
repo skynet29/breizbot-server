@@ -1,7 +1,7 @@
 
 $$.registerControlEx('TabControl', {
 	events: 'activate',
-	iface: 'addTab(title, options);getSelectedTabIndex();removeTab(tabIndex);on(event, callback)',
+	iface: 'addTab(title, options);getSelectedTabIndex();removeTab(tabIndex);on(event, callback);setActive(tabIndex)',
 	init: function(elt) {
 
 		var events = new EventEmitter2()
@@ -55,6 +55,10 @@ $$.registerControlEx('TabControl', {
 		}
 
 		this.on = events.on.bind(events)
+
+		this.setActive = function(tabIndex) {
+			elt.tabs('option', 'active', tabIndex)
+		}
 
 	}
 });

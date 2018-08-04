@@ -4,17 +4,16 @@
 const sys = require('../lib/sys')
 
 module.exports = function(app) {
-	var appsConfig = app.get('appsConfig')
 
 	function renderHome(req, res) {
 		console.log('renderHome')
 
 		const user = req.session.user
 		const allowedApps = req.session.allowedApps
-		//console.log('session', req.session)
+		console.log('allowedApps', allowedApps)
 
 		sys.readConfig().then(function(infos) {
-			//console.log('infos', infos)
+			console.log('infos', infos)
 			var appInfos = {}
 			for(var k in allowedApps) {
 				if (k in infos) {
@@ -23,7 +22,7 @@ module.exports = function(app) {
 				
 			}
 
-			//console.log('allowedAppsConfig', appInfos)
+			console.log('allowedAppsConfig', appInfos)
 
 			res.render('home', {user: user, appInfos})	
 			console.log('renderHome OK')

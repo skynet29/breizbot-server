@@ -3,7 +3,8 @@ $$.registerControlEx('HeaderControl', {
 	deps: ['WebSocketService'],
 	options: {
 		title: 'Hello World',
-		userName: 'unknown'
+		userName: 'unknown',
+		isHomePage: false
 	},
 	init: function(elt, options, client) {
 
@@ -13,7 +14,22 @@ $$.registerControlEx('HeaderControl', {
 				connected: false,
 				titleState: "WebSocket disconnected",
 				title: options.title,
-				userName: options.userName				
+				userName: options.userName,
+				isHomePage: options.isHomePage,
+				nbNotif: 0,
+				isNotifVisible: function() {
+					return this.nbNotif > 0
+				}				
+			},
+			events: {
+				onGoHome: function() {
+					location.href = '/'
+				},
+
+				onDisconnect: function() {
+					sessionStorage.clear()
+					location.href = '/disconnect'
+				}
 			}
 		})
 
@@ -29,6 +45,15 @@ $$.registerControlEx('HeaderControl', {
 			ctrl.setData({connected: false, titleState: "WebSocket disconnected"})
 
 		})
+
+		client.register('masterNotifications', true, onNotifications)
+
+		function onNotifications(msg) {
+			console.log('onNotifications', msg.data)
+			ctrl.setData({nbNotif: msg.data.length})
+		}
+
+
 	}
 
 });

@@ -8,6 +8,7 @@ function readConfig() {
 }
 
 function getAppProps(appName) {
+	console.log('getAppProps', appName)
 	return readConfig().then(function(appsInfo) {
 		return appsInfo[appName].props
 	})

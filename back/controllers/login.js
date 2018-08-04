@@ -1,4 +1,5 @@
-var usersModel = require('../lib/usersModelRedis')
+var usersModel = require('../lib/usersModel')
+var wss = require('../lib/wss')
 
 module.exports = function(app) {
 
@@ -19,16 +20,17 @@ module.exports = function(app) {
 			else {
 
 				req.session.connected = true
-/*				connectedUsers[user] = Date.now()
-*/				console.log(`user '${user}' connected with IP:${req.ip}`)
+				console.log(`user '${user}' connected with IP:${req.ip}`)
 
 				req.session.allowedApps = userInfo.allowedApps
 
+				if (Array.isArray(userInfo.notifications)) {
+					wss.publishNotifications(user, userInfo.notifications)
+				}
+
 				req.session.user = user
-				req.session.masterInfo = userInfo.master
 				res.redirect('/')
-/*				sendStatus()
-*/			}
+1			}
 
 		}).catch((e) => {
 				console.log('error', e)

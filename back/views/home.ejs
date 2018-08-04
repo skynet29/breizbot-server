@@ -1,67 +1,44 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-	<title>Home</title>
-    <meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" type="text/css" href="/css/externals.css">
-	<link rel="stylesheet" type="text/css" href="/css/common.css">
-	<link rel="stylesheet" type="text/css" href="/css/home.css">
+    <head>
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width">
 
-	<script type="text/javascript">
-		function disconnect() {
-			sessionStorage.clear()
-			location.href = '/disconnect'
-		}
-	</script>
-</head>
-<body>
-	<div class="header">
-		<h1>Welcome <%= user %></h1>
-		<button onclick="disconnect()" title="logout" class="w3-btn"><i class="fa fa-power-off fa-lg"></i></button> 
-	</div>
-	
-<div id="main">
+        <script src="/externals.js"></script> 
+        <script src="/core.js"></script> 
 
+        <script src="/controls/core.js"></script> 
+        <script src="/services.js"></script> 
 
-	<article>
-		<p>Available apps:</p>
-		<div class="bn-flex-row bn-flex-wrap">
-			<% for(var k in appInfos) {
-				var appInfo = appInfos[k]
-				var tileName = k
-				var desc = ''
-				var tileColor = 'w3-blue'
-				var props = appInfo.props
-				if (typeof props.tileName == 'string') {
-					tileName = props.tileName
+        <script type="text/javascript">
+        	$(function() {
+
+				var options = {
+					userName: '<%= user %>',
+					appName: 'home'
 				}
-				if (typeof props.desc == 'string') {
-					desc = props.desc
-				}
-				if (typeof props.tileColor == 'string') {
-					tileColor = props.tileColor
-				}
-				var className = "w3-btn appIcon " + tileColor
-				var href = "/apps/" + k
-			 %>
-				<a class="<%= className %>" href="<%= href %>" title="<%= desc %>">
-					
-					<div class="bn-flex-col" style="height: 100%; justify-content: center;">
-						<% if (typeof props.tileIcon == 'string') { %>
-						<div class="bn-flex-1 bn-flex-row" style="align-items: center; justify-content: center;">
-							<i class="<%= props.tileIcon %>"></i>
-						</div>
-						<% } %>
-						<span><%= tileName %></span>
-					</div>
 
-				</a>
-			<% } %>				
-		</div>
 
-	</article>
+				$$.configureService('WebSocketService', options)        		
 
-</div>
+        		$('body').processControls()
 
-</body>
+        	})
+        </script>
+      
+
+        <link rel="stylesheet" type="text/css" href="/css/externals.css">
+        <link rel="stylesheet" type="text/css" href="/css/common.css">
+
+        <link rel="stylesheet" type="text/css" href="/controls/core.css">
+     
+    </head>
+
+    <body>
+        <div bn-control="HeaderControl" data-title="Welcome" data-user-name="<%= user %>" data-is-home-page="true"></div>
+
+        <div bn-control="HomeControl"></div>
+
+    </body>
 </html>

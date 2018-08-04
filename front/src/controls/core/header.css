@@ -29,3 +29,18 @@
 	margin-right: 30px;
 }
 
+.HeaderControl .notification {
+	margin-right: 30px;
+	position: relative;
+}
+
+.HeaderControl .notification .w3-badge {
+	position: relative;
+	left: -15px;
+}
+
+.HeaderControl .infos {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}

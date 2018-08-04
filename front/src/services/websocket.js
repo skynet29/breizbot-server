@@ -1,20 +1,33 @@
 (function() {
 
+	var statusCodeMap = {
+		0: 'OK',
+		100: 'Service not available',
+		200: 'Invalid parameters'
+	}
+
+	function getErrorMessage(statusCode) {
+		return statusCodeMap[statusCode] || ''
+	}
+
 	class WebSocketClient {
 
-		constructor(options) {
+		constructor(id) {
 			this.sock = null
 			this.isConnected = false
 			this.topics = new EventEmitter2({wildcard: true})
 			this.services = new EventEmitter2()
 			this.events = new EventEmitter2()
 
-			this.options = options
-
 			this.registeredTopics = {}
 			this.registeredServices = {}
 			this.waitingMsg = {}
 			this.suspended = false
+
+			const host = location.hostname
+			const port = 8090
+
+			this.url = `wss://${host}:${port}/${id}`
 		}
 
 		suspend() {
@@ -33,19 +46,10 @@
 		}
 
 		connect() {
-			const {port, host, id} = this.options
-
-			if (!port || !host) {
-				console.warn('Websocket not configured !')
-				return
-				}
-
-
-			const url = `wss://${host}:${port}/${id}`
 
 			console.log('try to connect...')
 
-			var sock = new WebSocket(url)
+			var sock = new WebSocket(this.url)
 	
 			sock.addEventListener('open', () => {
 				console.log("Connected to Master")
@@ -236,8 +240,12 @@
 
 	$$.registerService('WebSocketService', function(config) {
 
+		var id = `hmi.${config.userName}.${config.appName}.` +  (Date.now() % 100000)
 
-		const client = new WebSocketClient(config)
+		console.log('id', id)
+
+
+		const client = new WebSocketClient(id)
 		client.connect()
 
 		return client;

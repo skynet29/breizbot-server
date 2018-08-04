@@ -92,7 +92,10 @@ getAppFolders()
 	.then(function(results) {
 		//console.log('results', results)
 		
-		fs.writeFile('./config/webapps.json', JSON.stringify(formatResults(results), null, 4))
+		return fs2.writeJSONFile('./config/webapps.json', formatResults(results))
+	})
+	.catch((e) => {
+		console.log('error', e)
 	})
 
 

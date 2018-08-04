@@ -12,9 +12,6 @@
   },
   "author": "Marc DELOMEZ",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/skynet29/brainbot/issues"
-  },
   "dependencies": {
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",
@@ -23,7 +20,11 @@
     "express": "^4.16.3",
     "express-fileupload": "^0.4.0",
     "express-session": "^1.15.6",
-    "redis": "^2.8.0"
+    "greenlock": "^2.3.8",
+    "nodejs-websocket": "^1.7.1",
+    "redirect-https": "^1.1.5",
+    "redis": "^2.8.0",
+    "uniqid": "^5.0.3"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

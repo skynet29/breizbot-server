@@ -39,6 +39,21 @@ $$.registerControlEx('UsersControl', {
 					var user = $li.data('user')
 					//console.log('user', user)
 					events.emit('userSelected', user)				
+				},
+				onNotifClicked: function(ev) {
+					var user = $(this).closest('li').data('user')
+					console.log('onNotifClicked', user)
+					$$.showPrompt('Message', 'SendNotification', (message) => {
+						console.log('message', message)
+						var data = {
+							type: 'message',
+							message
+						}
+
+						http.post('/api/notif/' + user, data).then((resp) => {
+							console.log('resp', resp)
+						})
+					})
 				}
 			}
 		})			
