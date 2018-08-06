@@ -67,9 +67,28 @@ function sendNotification(userName, notif) {
 
 }
 
+function removeNotification(userName, notifId) {
+	console.log('removeNotification', userName, notifId)
+	return usersModel.getUserInfo(userName).then((userInfo) => {
+		if (Array.isArray(userInfo.notifications)) {
+
+			var idx = userInfo.notifications.findIndex((item) => {
+				return item.id == notifId
+			})
+
+			 userInfo.notifications.splice(idx, 1)
+
+			publishNotifications(userName, userInfo.notifications)
+			return usersModel.updateUserInfo(userName, userInfo)			 
+		}
+
+	})	
+}
+
 
 module.exports = {
 	init,
 	publishNotifications,
-	sendNotification
+	sendNotification,
+	removeNotification
 }

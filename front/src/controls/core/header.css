@@ -33,6 +33,7 @@
 .HeaderControl .notification {
 	margin-right: 30px;
 	position: relative;
+	text-align: center;
 }
 
 .HeaderControl .notification .w3-badge {

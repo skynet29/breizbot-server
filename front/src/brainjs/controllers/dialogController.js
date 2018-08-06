@@ -2,25 +2,29 @@ $$.dialogController = function(title, options) {
 	var div = $('<div>', {title: title})
 
 	var ctrl = $$.viewController(div, options)
-	div.dialog({
+
+	var dlgOptions = $.extend({
 		autoOpen: false,
 		modal: true,
-		width: 'auto',
-		buttons: {
-			'Cancel': function() {
-				$(this).dialog('close')
-			},
-			'Apply': function() {					
-				$(this).dialog('close')
-				if (typeof options.onApply == 'function') {
-					options.onApply.call(ctrl)
-				}	
-			}
-		}
-	})
+		width: 'auto',		
+	}, options.options)
+
+	//console.log('dlgOptions', dlgOptions)
+
+	div.dialog(dlgOptions)
+
 	ctrl.show = function() {
 		div.dialog('open')
 	}
+
+	ctrl.hide = function() {
+		div.dialog('close')
+	}
+
+	ctrl.setOption = function(optionName, value) {
+		div.dialog('option', optionName, value)
+	}
+
 	return ctrl
 };
 

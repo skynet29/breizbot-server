@@ -6,7 +6,8 @@ $$.showAlert = function(text, title, callback) {
 			classes: {
 				'ui-dialog-titlebar-close': 'no-close'
 			},
-			width: 'auto',
+			//width: 'auto',
+			minWidth: 200,
 			maxHeight: 400,
 			modal: true,
 			close: function() {

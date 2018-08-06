@@ -13,7 +13,7 @@ $$.registerControlEx('HomeControl', {
 		})
 
 		http.get('/api/app/webapps').then((appInfos) => {
-			console.log('appInfos', appInfos)
+			//console.log('appInfos', appInfos)
 
 			var apps = []
 
@@ -48,7 +48,7 @@ $$.registerControlEx('HomeControl', {
 
 			}
 
-			console.log('apps', apps)
+			//console.log('apps', apps)
 			ctrl.setData({apps})
 			
 		})

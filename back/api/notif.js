@@ -10,12 +10,24 @@ routes.post('/:userName', function(req, res) {
 	var userName = req.params.userName
 
 	wss.sendNotification(userName, notif).then( () => {
-		es.sendStatus(200)
+		res.sendStatus(200)
 	})
 	.catch(() => {
 		res.sendStatus(400)
 	})	
 
+})
+
+routes.delete('/:id', function(req, res) {
+	var user = req.session.user
+	var notifId = req.params.id
+
+	wss.removeNotification(user, notifId).then( () => {
+		res.sendStatus(200)
+	})
+	.catch((e) => {
+		res.sendStatus(400)
+	})
 })
 
 

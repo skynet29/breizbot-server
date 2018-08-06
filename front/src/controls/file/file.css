@@ -36,26 +36,7 @@
 	flex-wrap: wrap;
 }
 
-.FileControl button {
-	border: none;
-	background-color: transparent;
-	padding: 0;
-}
 
-.FileControl .toolbar button {
-	border: 2px solid white;
-	border-radius: 50%;
-	background-color: transparent;
-	padding-right: 6px;
-	padding-left: 6px;
-	text-align: center;
-	color: white;
-}
-
-.FileControl button.selected {
-	background-color: white;
-	color: black;
-}
 
 .FileControl .pathPanel {
 	margin-bottom: 10px;
@@ -69,20 +50,15 @@
 	border: 2px solid red;
 }
 
-.FileControl .toolbar {
-	background-color: black;
-	border-top: 1px solid white;
-	padding: 5px;
-	display: flex;
-	justify-content: space-between;
-}
 
 
 .FileControl .contentPanel {
 	padding: 10px;
 }
 
-
+.FileControl .subToolbar {
+	margin-right: 10px;
+}
 
 .FileControl .subToolbar > button:nth-child(2) {
 	margin-right: 40px;

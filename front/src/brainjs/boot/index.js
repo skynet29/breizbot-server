@@ -57,9 +57,10 @@ $$.configReady = function(onConfigReady) {
 			$$.configureService('WebSocketService', options)
 		
 			
-			$('body').processControls() // process HeaderControl
 			
 			try {
+				$('body').processControls() // process HeaderControl
+				
 				onConfigReady(config)
 			}
 			catch(e) {

@@ -1,7 +1,7 @@
 <div class="bn-flex-col">
 
 	<div bn-show="!showPhoto">
-		<div bn-show="showBtn" class="toolbar">
+		<div bn-show="showBtn" class="bn-toolbar">
 			<button title="Take a picture" bn-event="click: onTakePhoto" ><i class="fa fa-camera"></i></button>
 		</div>
 
@@ -14,7 +14,7 @@
 	</div>
 
 	<div bn-show="showPhoto" >
-		<div class="toolbar">
+		<div class="bn-toolbar">
 			<button title="Back" bn-event="click: onBack"><i class="fa fa-arrow-left"></i></button>
 			<button title="Save Picture" bn-event="click: onSave"><i class="fa fa-save"></i></button>
 		</div>

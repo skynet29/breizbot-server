@@ -1,10 +1,10 @@
 <div >
 	<div class="brand"><h1 class="bn-xs-hide" bn-text="title"></h1> </div>
 	<div class="infos">
-		<div class="notification" title="notification">
-			<i class="fa fa-lg fa-bell"></i>
+		<button class="notification w3-btn" title="notification" bn-event="click: onNotification">
+			<i class="fa fa-lg fa-bell w3-text-white" ></i>
 			<span class="w3-badge w3-red w3-tiny" bn-text="nbNotif" bn-show="isNotifVisible"></span>			
-		</div>
+		</button>
 
 	    <i bn-attr="title: titleState" class="fa fa-lg connectionState" bn-class="fa-eye: connected, fa-eye-slash: !connected"></i>
 
@@ -17,6 +17,7 @@
 
 	    <button title="home" class="w3-btn" bn-event="click: onGoHome" bn-show="!isHomePage"><i class="fa fa-home fa-lg"></i></button> 
 
-<!-- 	    <a href="/" title="home"><i class="fa fa-home fa-lg"></i></a> 
- -->	</div>
+	</div>
+
+
 </div>
