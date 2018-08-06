@@ -1,5 +1,6 @@
 const EventEmitter2 = require('eventemitter2').EventEmitter2
 
+
 function sendMsg(client, msg) {
 		//console.log('sendMsg', msg.topic)
 	client.sendText(JSON.stringify(msg))
@@ -11,6 +12,17 @@ class Broker {
 		this.notifHistory = {}
 
 		this.clients = {}
+	}
+
+	isAppConnected(appType, appName) {
+		for(var client in this.clients) {
+			var f = client.split('.')
+			if (appType == f[0] && appName == f[2]) {
+				return true
+			}
+
+		}
+		return false
 	}
 
 
@@ -33,16 +45,15 @@ class Broker {
 
 		})
 
-		client.on('close', (code)  => {
-			console.log(`Client '${id}' disconnected`)
-			delete this.clients[id]
-			this.sendStatus()
-		})
+	
 
-		client.on('error', (err) => {
-			console.log('connection error')
-		})		
+	}
 
+	removeClient(id) {
+		console.log('removeClient', id)
+
+		delete this.clients[id]
+		this.sendStatus()
 	}
 
 

@@ -1,6 +1,7 @@
 const ws = require("nodejs-websocket")
 const usersModel = require('./usersModel')
 const uniqid = require('uniqid')
+const colors = require('colors')
 
 var Broker = require('./broker')
 
@@ -25,9 +26,11 @@ function getBroker(userName) {
 }
 
 function onConnect(client) {
-	console.log('New connection', client.path)
+	
 
 	var id = client.path.substr(1)
+
+	console.log(`New connection ${id}`.green)
 
 	var f = id.split('.')
 	if (f.length < 3) {
@@ -36,12 +39,40 @@ function onConnect(client) {
 		return
 	}
 	var userName = f[1]
-
-	//console.log('userName', userName)
+	var appName = f[2]
+	var appType = f[0]
 
 	var broker = getBroker(userName)
 
+
+	//console.log('userName', userName)
+	client.on('close', (code)  => {
+		console.log(`Client '${id}' disconnected`.red)
+		broker.removeClient(id)
+
+		if (appType == 'hmi' && appName == 'tchat') {
+			// warn all friends of that client
+			getFriends(userName).then((friend) => {
+				publishFriends(friend)
+			})
+		}
+		
+	})
+
+	client.on('error', (err) => {
+		console.log('connection error')
+	})		
+
+	
+
 	broker.addClient(id, client)
+
+	if (appType == 'hmi' && appName == 'tchat') {
+		publishFriends(userName)
+		getFriends(userName).then((friend) => {
+			publishFriends(friend)
+		})		
+	}
 
 }
 
@@ -83,6 +114,30 @@ function removeNotification(userName, notifId) {
 		}
 
 	})	
+}
+
+function getFriends(userName) {
+	console.log('getFriends', userName)
+	return usersModel.getUserInfo(userName).then((userInfo) => {
+		return userInfo.friends
+	})	
+}
+
+function publishFriends(userName) {
+	console.log('publishFriends', userName)
+	return getFriends(userName).then((friends) => {
+		if (Array.isArray(friends)) {
+			var data = friends.map((friendName) => {
+				var broker = getBroker(friendName)
+
+				return {name: friendName, isConnected: broker.isAppConnected('hmi', 'tchat')}
+			})
+
+			getBroker(userName).sendMessage('masterFriends', data)
+		}
+
+
+	})
 }
 
 
