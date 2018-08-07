@@ -1,0 +1,13 @@
+.FriendsPanelControl h1 {
+	font-size: 1.5em;
+}
+
+.FriendsPanelControl .item {
+	display: flex;
+	justify-content: space-between;
+	padding: 5px;
+}
+
+.FriendsPanelControl .item .name {
+	cursor: pointer;
+}

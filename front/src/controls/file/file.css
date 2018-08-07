@@ -34,6 +34,7 @@
 .FileControl .container {
 	display: flex;
 	flex-wrap: wrap;
+	overflow: auto;
 }
 
 
@@ -54,16 +55,19 @@
 
 .FileControl .contentPanel {
 	padding: 10px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+
 }
 
 .FileControl .subToolbar {
-	margin-right: 10px;
+	margin-right: 5px;
 }
 
-.FileControl .subToolbar > button:nth-child(2) {
-	margin-right: 40px;
+.FileControl .subToolbar:not(:last-child) {
+	border-right: 1px solid white;
+	padding-right: 5px;
 }
 
-.FileControl .subToolbar > button:nth-child(6) {
-	margin-right: 40px;
-}
+

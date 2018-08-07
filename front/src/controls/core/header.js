@@ -12,7 +12,7 @@ $$.registerControlEx('HeaderControl', {
 			template: {gulp_inject: './headerNotif.html'},
 			data: {notifs: []},
 			options: {
-				width: 400
+				width: 'auto'
 			},
 			events: {
 				onDelete: function() {

@@ -1,4 +1,4 @@
-<div class="bn-flex-col bn-flex-1">
+<div class="bn-flex-col" style="height: 100%">
 	<div class="bn-toolbar">
 
 		<div class="subToolbar" bn-show="showToolbar">		
@@ -18,6 +18,10 @@
 				>
 					<i class="fa fa-times"></i>
 			</button>
+
+		</div>
+
+		<div class="subToolbar" bn-show="showToolbar">
 
 			<button 
 				bn-event="click: onDelete" 
@@ -51,6 +55,10 @@
 					<i class="fa fa-paste" ></i>
 			</button>
 
+		</div>
+
+		<div class="subToolbar" bn-show="showToolbar">
+
 			<button 
 				bn-event="click: onCreateFolder" 
 				title="New folder"
@@ -67,9 +75,12 @@
 
 		</div>
 
-		<button bn-event="click: onBackBtn" title="Top folder" bn-show="backVisible">
-			<i class="fa fa-arrow-left"></i>
-		</button>				
+		<div class="subToolbar"  bn-show="backVisible">
+
+			<button bn-event="click: onBackBtn" title="Top folder">
+				<i class="fa fa-arrow-left"></i>
+			</button>	
+		</div>			
 
 	</div>
 

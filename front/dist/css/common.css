@@ -101,6 +101,7 @@ tr.bn-middle > td {
 	border-top: 1px solid white;
 	padding: 5px;
 	display: flex;
+	min-height: 40px;
 }
 
 .bn-toolbar button {
@@ -129,6 +130,18 @@ tr.bn-middle > td {
 	.bn-sm-hide {
 		display: none;
 	}	
+}
+
+@media screen and (orientation: portrait) {
+	.responsive-image {
+		max-width: 100%
+	}
+}
+
+@media screen and (orientation: landscape) {
+	.responsive-image {
+		max-height: 100%
+	}
 }
 
 button:focus {

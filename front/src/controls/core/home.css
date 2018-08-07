@@ -7,4 +7,18 @@
 
 .HomeControl .main {
 	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	//flex: 1;
+	height: 100%;
+	overflow: hidden;
+}
+
+.HomeControl .content {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex: 1;
+	overflow: auto;
+	align-content: start;
 }

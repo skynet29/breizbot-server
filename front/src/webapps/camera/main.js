@@ -1,5 +1,6 @@
 $$.registerControl('MainControl', ['FileService'], function(elt, fileSrv) {
 
+	var audio = new Audio('/webapps/camera/assets/camera_shutter.mp3')
 
 
 	var pictureUrl
@@ -34,6 +35,7 @@ $$.registerControl('MainControl', ['FileService'], function(elt, fileSrv) {
 		events: {
 			onTakePhoto: function() {
 				console.log('onTakePhoto')
+				audio.play()
 				pictureUrl = ctrl.scope.video.takePicture()
 				ctrl.setData({imgUrl: pictureUrl, showPhoto: true})
 				

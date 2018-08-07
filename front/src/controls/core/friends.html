@@ -1,0 +1,15 @@
+<div style="display: flex; flex-direction: column;">
+	<h1>Friends</h1>
+	<div class="scrollPanel">
+		<div bn-each="f of friends">
+			<div class="item">
+				<div class="name">
+					<span bn-text="f.name"></span>
+				</div>
+				<div bn-show="f.isConnected" class="w3-text-green">
+					<i class="fa fa-check"></i>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>

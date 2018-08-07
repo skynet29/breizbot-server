@@ -1,5 +1,6 @@
 $$.registerControl('MainControl', ['FileService'], function(elt, fileSrv) {
 
+
 	var ctrl = window.app = $$.viewController(elt, {
 		template: {gulp_inject: './main.html'},
 		data: {
