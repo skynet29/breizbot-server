@@ -55,6 +55,8 @@ $$.configReady = function(onConfigReady) {
 
 
 			$$.configureService('WebSocketService', options)
+			$$.configureService('UserService', options)
+
 		
 			
 			

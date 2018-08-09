@@ -17,5 +17,9 @@ $$.registerControlEx('FriendsPanelControl', {
 			console.log('onFriends', msg.data)
 			ctrl.setData({friends: msg.data})
 		}
+
+		this.getFriends = function() {
+			return ctrl.model.friends
+		}
 	}
 });

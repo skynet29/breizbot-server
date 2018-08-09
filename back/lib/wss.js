@@ -52,8 +52,11 @@ function onConnect(client) {
 
 		if (appType == 'hmi' && appName == 'tchat') {
 			// warn all friends of that client
-			getFriends(userName).then((friend) => {
-				publishFriends(friend)
+			getFriends(userName).then((friends) => {
+				(friends || []).forEach((friend) => {
+					readAndPublishFriends(friend)
+				})
+				
 			})
 		}
 		
@@ -69,9 +72,12 @@ function onConnect(client) {
 
 	if (appType == 'hmi' && appName == 'tchat') {
 		publishFriends(userName)
-		getFriends(userName).then((friend) => {
-			publishFriends(friend)
-		})		
+		getFriends(userName).then((friends) => {
+			(friends || []).forEach((friend) => {
+				readAndPublishFriends(friend)
+			})
+			
+		})	
 	}
 
 }
@@ -116,6 +122,27 @@ function removeNotification(userName, notifId) {
 	})	
 }
 
+function addFriend(userName, friend) {
+	console.log('addFriend', userName, friend)
+	return usersModel.getUserInfo(userName).then((userInfo) => {
+		if (!Array.isArray(userInfo.friends)) {
+			userInfo.friends = []
+		}
+		userInfo.friends.push(friend)
+		publishFriends(userName, userInfo.friends)
+		return usersModel.updateUserInfo(userName, userInfo)
+
+	})	
+}
+
+function acceptInvit(userName, from) {
+	console.log('acceptInvit', userName, from)
+	addFriend(userName, from).then(() => {
+			return addFriend(from, userName)
+		})
+
+}
+
 function getFriends(userName) {
 	console.log('getFriends', userName)
 	return usersModel.getUserInfo(userName).then((userInfo) => {
@@ -123,27 +150,35 @@ function getFriends(userName) {
 	})	
 }
 
-function publishFriends(userName) {
-	console.log('publishFriends', userName)
+function readAndPublishFriends(userName) {
+	console.log('readAndPublishFriends', userName)
 	return getFriends(userName).then((friends) => {
-		if (Array.isArray(friends)) {
-			var data = friends.map((friendName) => {
-				var broker = getBroker(friendName)
 
-				return {name: friendName, isConnected: broker.isAppConnected('hmi', 'tchat')}
-			})
-
-			getBroker(userName).sendMessage('masterFriends', data)
-		}
-
+		publishFriends(userName, friends)
 
 	})
 }
 
+function publishFriends(userName, friends) {
+	console.log('publishFriends', userName, friends)
+
+	if (Array.isArray(friends)) {
+		var data = friends.map((friendName) => {
+			var broker = getBroker(friendName)
+
+			return {name: friendName, isConnected: broker.isAppConnected('hmi', 'tchat')}
+		})
+
+		getBroker(userName).sendMessage('masterFriends', data)
+	}
+
+
+}
 
 module.exports = {
 	init,
 	publishNotifications,
 	sendNotification,
-	removeNotification
+	removeNotification,
+	acceptInvit
 }

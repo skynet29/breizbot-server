@@ -42,7 +42,12 @@ module.exports =  {
 	getUserInfo: function(userName) {
 
 		console.log('getUserInfo', userName)
-		return Promise.resolve(users[userName])
+		var info = users[userName]
+		if (info == undefined) {
+			return Promise.reject(`Unknown user '${userName}'`)
+		}
+
+		return Promise.resolve(info)
 	},
 
 

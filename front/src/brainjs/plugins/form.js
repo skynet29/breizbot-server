@@ -47,12 +47,16 @@
 		return ret
 	}
 
+	$.fn.resetForm = function() {
+		if (this.get(0).tagName == "FORM") {
+			this.get(0).reset()
+		}		
+	}
+
 	$.fn.setFormData = function(data) {
 
 		//console.log('setFormData', data)
-		if (this.get(0).tagName == "FORM") {
-			this.get(0).reset()
-		}
+		this.resetForm()
 
 		for(var name in data) {
 			var value = data[name]

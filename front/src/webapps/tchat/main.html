@@ -1,5 +1,15 @@
-<div style="display: flex; flex:1">
+<div style="display: flex;flex-direction: column;flex: 1">
 	
-	<div style="flex: 1"></div>
-	<div bn-control="FriendsPanelControl" style="width: 200px" class="w3-border"></div>
+
+	<form style="padding: 5px;" bn-event="submit: onInvit">
+		<input type="text" name="userName" placeholder="user name" required="">
+		<button class="w3-button w3-blue" type="submit">Invit</button>
+	</form>
+
+	<div style="display: flex; flex:1">
+		
+		<div style="flex: 1"></div>
+		<div bn-control="FriendsPanelControl" style="width: 200px" class="w3-border" bn-iface="friendsCtrl"></div>
+	</div>
+
 </div>

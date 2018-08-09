@@ -1,8 +1,15 @@
 
-<ul class="w3-ul w3-border w3-white" bn-each="n of notifs" bn-event="click.delete: onDelete">
-	<li class="w3-bar" bn-data="notif: n">
+<ul class="w3-ul w3-border w3-white" bn-each="n of notifs" 
+	bn-event="click.delete: onDelete, click.deny: onDeny, click.accept: onAccept">
+	<li class="w3-bar" bn-data="notif: n" bn-show="!n.isInvit">
 		<span class="w3-button w3-right delete" title="Delete"><i class="fa fa-times"></i></span>
 
-		<div class="w3-bar-item" bn-text="n.message"></div>
+		<div class="w3-bar-item" bn-html="n.message" ></div>
 	</li>
+	<li class="w3-bar" bn-data="notif: n" bn-show="n.isInvit">
+		<span class="w3-button w3-right w3-green accept">Accept</i></span>
+		<span class="w3-button w3-right w3-red deny">Deny</i></span>
+
+		<div class="w3-bar-item" bn-html="n.message" ></div>
+	</li>		
 </ul>		

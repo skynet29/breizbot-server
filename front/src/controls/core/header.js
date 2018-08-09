@@ -19,6 +19,22 @@ $$.registerControlEx('HeaderControl', {
 					var notif = $(this).closest('li').data('notif')
 					//console.log('onDelete', notif)
 					http.delete('/api/notif/' + notif.id)
+				},
+				onAccept: function() {
+					var notif = $(this).closest('li').data('notif')
+					console.log('onAccept', notif)
+
+					http.post('/api/notif/accept/' + notif.from)
+
+					http.delete('/api/notif/' + notif.id)
+
+				},
+				onDeny: function() {
+					var notif = $(this).closest('li').data('notif')
+					console.log('onDeny', notif)
+
+					http.delete('/api/notif/' + notif.id)
+
 				}
 			}
 		})
@@ -75,9 +91,14 @@ $$.registerControlEx('HeaderControl', {
 		client.register('masterNotifications', true, onNotifications)
 
 		function onNotifications(msg) {
-			//console.log('onNotifications', msg.data)
+			console.log('onNotifications', msg.data)
 			ctrl.setData({nbNotif: msg.data.length})
-			dlgCtrl.setData({notifs: msg.data})
+			dlgCtrl.setData({
+				notifs: msg.data.map((item) => {
+					item.isInvit = (item.type == 'invit')
+					return item
+				})
+			})
 			if (msg.data.length == 0) {
 				dlgCtrl.hide()
 			}

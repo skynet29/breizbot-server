@@ -93,9 +93,9 @@ function dbReady() {
 	})
 
 
-	http.createServer(greenlock.middleware(redir)).listen(80)
+	http.createServer(greenlock.middleware(redir)).listen(8080)
 	 
-	var server = https.createServer(greenlock.tlsOptions, app).listen(443)
+	var server = https.createServer(greenlock.tlsOptions, app).listen(8443)
 
 	
 	wss.init(greenlock.tlsOptions)
