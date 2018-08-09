@@ -28,6 +28,8 @@ module.exports = function(app) {
 					wss.publishNotifications(user, userInfo.notifications)
 				}
 
+				wss.publishFriends(user, userInfo.friends)
+
 				req.session.user = user
 				res.redirect('/')
 1			}

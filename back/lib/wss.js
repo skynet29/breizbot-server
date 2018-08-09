@@ -71,7 +71,7 @@ function onConnect(client) {
 	broker.addClient(id, client)
 
 	if (appType == 'hmi' && appName == 'tchat') {
-		publishFriends(userName)
+		//readAndPublishFriends(userName)
 		getFriends(userName).then((friends) => {
 			(friends || []).forEach((friend) => {
 				readAndPublishFriends(friend)
@@ -180,5 +180,6 @@ module.exports = {
 	publishNotifications,
 	sendNotification,
 	removeNotification,
-	acceptInvit
+	acceptInvit,
+	publishFriends
 }

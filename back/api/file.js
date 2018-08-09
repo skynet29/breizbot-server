@@ -18,15 +18,22 @@ routes.post('/save', function(req, res) {
 	var userPath = path.join(usersPath, user)
 	var picture = req.files.picture
 	var destPath = req.body.destPath
-	console.log('destPath', destPath)
 
-	console.log('userPath', userPath)
-
-	fs2.lstat(userPath).catch(function(err) {
+	fs2.lstat(usersPath)
+	.catch(function(err) {
 		console.log('lstat', err)
-		return fs2.mkdir(userPath)
+		return fs2.mkdir(usersPath)
 	})
 	.then(function() {
+		return fs2.lstat(userPath)
+	})
+	.catch(function(err) {
+		console.log('lstat', err)
+		return fs2.mkdir(userPath)
+	})		
+	.then(function() {
+		console.log('destPath', destPath)
+		console.log('userPath', userPath)
 		picture.mv(path.join(usersPath, user, destPath, picture.name), function(err) {
 		    if (err) {
 		    	console.log('err', err)
@@ -130,10 +137,18 @@ routes.post('/mkdir', function(req, res) {
 	console.log('userPath', userPath)
 
 
-	fs2.lstat(userPath).catch(function(err) {
+	fs2.lstat(usersPath)
+	.catch(function(err) {
+		console.log('lstat', err)
+		return fs2.mkdir(usersPath)
+	})
+	.then(function() {
+		return fs2.lstat(userPath)
+	})
+	.catch(function(err) {
 		console.log('lstat', err)
 		return fs2.mkdir(userPath)
-	})
+	})		
 	.then(function() {
 		return fs2.mkdir(path.join(usersPath, user, fileName))
 	})		
