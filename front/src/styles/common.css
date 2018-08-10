@@ -14,7 +14,9 @@ body {
 	
 }
 
-
+* {
+	box-sizing: border-box;
+}
 
 .mainPanel {
 	//padding: 10px;
@@ -102,9 +104,10 @@ tr.bn-middle > td {
 	padding: 5px;
 	display: flex;
 	min-height: 40px;
+	flex-wrap: wrap;
 }
 
-.bn-toolbar button {
+.bn-toolbar .button {
 	border: 2px solid white;
 	border-radius: 50%;
 	background-color: transparent;
@@ -115,12 +118,34 @@ tr.bn-middle > td {
 	margin-right: 5px;
 }
 
-.bn-toolbar button.selected {
+.bn-circle {
+	border: 2px solid white;
+	border-radius: 50%;
+	background-color: transparent;
+	padding: 6px;
+	width: 30px;
+	height: 30px;
+	color: white;
+	//margin-right: 5px;	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.bn-btn {
+	margin: 0px; 
+	padding: 6px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.bn-circle.selected {
 	background-color: white;
 	color: black;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 500px) {
 	.bn-xs-hide {
 		display: none;
 	}	

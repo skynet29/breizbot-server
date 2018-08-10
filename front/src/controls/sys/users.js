@@ -35,7 +35,7 @@ $$.registerControlEx('UsersControl', {
 					ev.preventDefault()
 					ctrl.scope.ul.find('li').removeClass('w3-blue')
 					var $li = $(this).closest('li')
-					$li.addClass('w3-blue')
+					//$li.addClass('w3-blue')
 					var user = $li.data('user')
 					//console.log('user', user)
 					events.emit('userSelected', user)				

@@ -63,6 +63,7 @@
 
 .FileControl .subToolbar {
 	margin-right: 5px;
+	display: flex;
 }
 
 .FileControl .subToolbar:not(:last-child) {

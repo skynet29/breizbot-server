@@ -3,83 +3,115 @@
 
 		<div class="subToolbar" bn-show="showToolbar">		
 
-			<button 
-				bn-event="click: onToggleSelMode" 
-				title="Select mode" 
-				bn-class="selected: selMode"
-				>
-					<i class="fa fa-check"></i>
-			</button>
+			<div class="bn-btn w3-btn" bn-event="click: onToggleSelMode" >
+				<div class="bn-circle"  bn-class="selected: selMode">
+					<i class="fa fa-check" ></i>
+				</div>
 
-			<button 
-				bn-event="click: onCancelSelection" 
-				title="Cancel selection"
-				bn-prop="disabled: !canCancel"  
-				>
-					<i class="fa fa-times"></i>
-			</button>
+
+				<span class="w3-text-white w3-tiny w3-center bn-xs-hide" style="margin-top: 8px;">Select Mode</span>
+				
+			</div>	
+
+
+			<div class="bn-btn w3-btn" bn-event="click: onCancelSelection" bn-prop="disabled: !canCancel">
+				<div class="bn-circle">
+					<i class="fa fa-times" ></i>
+				</div>
+
+
+				<span class="w3-text-white w3-tiny w3-center bn-xs-hide" style="margin-top: 8px;">Cancel Selection</span>
+				
+			</div>	
+
 
 		</div>
 
 		<div class="subToolbar" bn-show="showToolbar">
 
-			<button 
-				bn-event="click: onDelete" 
-				bn-prop="disabled: !fileSelected" 
-				title="Delete selected files"
-				>
+			<button class="bn-btn w3-btn" bn-event="click: onDelete" bn-prop="disabled: !fileSelected" >
+				<div class="bn-circle">
 					<i class="fa fa-trash" ></i>
-			</button>
+				</div>
 
-			<button 
-				title="Cut" 
-				bn-event="click: onCut" 
-				bn-prop="disabled: !fileSelected"
-				>
+
+				<span class="w3-text-white w3-tiny w3-center bn-xs-hide" style="margin-top: 8px;">Delete</span>
+				
+			</button>				
+
+			<button class="bn-btn w3-btn" bn-event="click: onCut" bn-prop="disabled: !fileSelected" >
+				<div class="bn-circle">
 					<i class="fa fa-cut" ></i>
-			</button>
+				</div>
 
-			<button 
-				title="Copy" 
-				bn-prop="disabled: !fileSelected" 
-				bn-event="click: onCopy"
-				>
+
+				<span class="w3-text-white w3-tiny w3-center bn-xs-hide" style="margin-top: 8px;">Cut</span>
+				
+			</button>			
+
+			<button class="bn-btn w3-btn" bn-event="click: onCopy" bn-prop="disabled: !fileSelected" >
+				<div class="bn-circle">
 					<i class="fa fa-copy" ></i>
-			</button>
+				</div>
 
-			<button 
-				title="Paste" 
-				bn-prop="disabled: !canPaste" 
-				bn-event="click: onPaste"
-				>
+
+				<span class="w3-text-white w3-tiny w3-center bn-xs-hide" style="margin-top: 8px;">Copy</span>
+				
+			</button>	
+		
+
+			<button class="bn-btn w3-btn" bn-event="click: onPaste" bn-prop="disabled: !canPaste" >
+				<div class="bn-circle">
 					<i class="fa fa-paste" ></i>
-			</button>
+				</div>
+
+
+				<span class="w3-text-white w3-tiny w3-center bn-xs-hide" style="margin-top: 8px;">Paste</span>
+				
+			</button>	
+
 
 		</div>
 
 		<div class="subToolbar" bn-show="showToolbar">
 
-			<button 
-				bn-event="click: onCreateFolder" 
-				title="New folder"
-				>
+			<button class="bn-btn w3-btn" bn-event="click: onCreateFolder">
+				<div class="bn-circle">
 					<i class="fa fa-folder-open" ></i>
-			</button>
-			
-			<button 
-				title="Import file" 
-				bn-event="click: onImportFile"
-				>
+				</div>
+
+
+				<span class="w3-text-white w3-tiny w3-center bn-xs-hide" style="margin-top: 8px;">New Folder</span>
+				
+			</button>	
+
+			<button class="bn-btn w3-btn" bn-event="click: onImportFile">
+				<div class="bn-circle">
 					<i class="fa fa-upload" ></i>
-			</button>
+				</div>
+
+
+				<span class="w3-text-white w3-tiny w3-center bn-xs-hide" style="margin-top: 8px;">Import File</span>
+				
+			</button>							
+
+			
 
 		</div>
 
 		<div class="subToolbar"  bn-show="backVisible">
 
-			<button bn-event="click: onBackBtn" title="Top folder">
-				<i class="fa fa-arrow-left"></i>
-			</button>	
+			<button class="bn-btn w3-btn" bn-event="click: onBackBtn">
+				<div class="bn-circle">
+					<i class="fa fa-arrow-left" ></i>
+				</div>
+
+
+				<span class="w3-text-white w3-tiny w3-center bn-xs-hide" style="margin-top: 8px;">Top Folder</span>
+				
+			</button>				
+
+
 		</div>			
 
 	</div>
