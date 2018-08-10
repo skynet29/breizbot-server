@@ -8,6 +8,13 @@ $$.registerControlEx('FriendsPanelControl', {
 			template: {gulp_inject: './friends.html'},
 			data: {
 				friends: []
+			},
+			events: {
+				onItemClicked: function() {
+					var data = $(this).closest('.item').data('info')
+					console.log('onItemClicked', data)
+					elt.trigger('friendSelected', data)
+				}
 			}
 		})
 

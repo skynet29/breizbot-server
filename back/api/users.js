@@ -48,8 +48,8 @@ routes.post('/', function(req, res) {
 	usersModel.createUser(req.body.userName).then((doc) => {
 		res.sendStatus(201)
 	})	
-	.catch(() => {
-		res.sendStatus(400)
+	.catch((e) => {
+		res.status(400).send(e)
 	})	
 
 })

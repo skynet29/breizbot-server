@@ -9,10 +9,17 @@
 
 
 
-	<div style="display: flex; flex:1;">
+	<div class="bn-flex-row bn-flex-1">
 		
-		<div style="flex: 1" class="w3-card-4 w3-margin"></div>
-		<div bn-control="FriendsPanelControl" style="width: 200px" class="w3-card-4 w3-margin" bn-iface="friendsCtrl"></div>
+		<div class="bn-flex-col bn-flex-1" class="w3-card-4 w3-margin">
+			<div bn-control="TabControl" style="flex: 1" bn-iface="tabCtrl"></div>
+
+			<form style="padding: 5px;display: flex;" bn-event="submit: onSend">
+				<input type="text" name="message" placeholder="your message" required="" class="w3-input w3-border">
+				<button class="w3-btn w3-blue w3-bar-item w3-right" type="submit">Send</button>
+			</form>				
+		</div>
+		<div bn-control="FriendsPanelControl" style="width: 200px" class="w3-card-4 w3-margin" bn-iface="friendsCtrl" bn-event="friendSelected: onFriendSelected"></div>
 	</div>
 
 </div>

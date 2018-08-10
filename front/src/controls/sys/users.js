@@ -17,7 +17,12 @@ $$.registerControlEx('UsersControl', {
 					var data = $(this).getFormData()
 					$(this).get(0).reset()
 					//console.log('submit', data)
-					http.post('/api/users', data).then(loadUsers)
+					http.post('/api/users', data)
+					.then(loadUsers)
+					.catch((e) => {
+						//console.log('Error', e)
+						$$.showAlert(e.responseText)
+					})
 				},
 				onDeleteUser: function(ev) {
 					//console.log('onDeleteUser')

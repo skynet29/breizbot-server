@@ -11,11 +11,16 @@ $$.registerControlEx('TabControl', {
 		elt.children('div').each(function() {
 			var title = $(this).attr('title')
 			var id = $(this).uniqueId().attr('id')
-			var li = $('<li>').append($('<a>', {href: '#' + id}).text(title)).appendTo(ul)
+			var li = $('<li>')
+				.attr('title', title)
+				.append($('<a>', {href: '#' + id}).text(title))
+				.appendTo(ul)
 			if ($(this).attr('data-removable') != undefined) {
 				li.append($('<span>', {class: 'ui-icon ui-icon-close'}))
 			}
 		})
+
+		elt.css({display: 'flex', 'flex-direction': 'column'})
 		
 		elt.tabs({
 			activate: function() {
@@ -30,16 +35,50 @@ $$.registerControlEx('TabControl', {
 			elt.tabs('refresh')
 		})
 
+		function getCount() {
+			return ul.children('li').length
+		}
+
 		this.addTab = function(title, options) {
+			console.log('addTab', getCount())
+			var idx = getCount()
 			options = options || {}
-			var tab = $('<div>').html(options.template).appendTo(elt)
+			var tab = $('<div>')
+				.html(options.template)
+				.css('flex', '1')
+				.attr('title', title)
+				.appendTo(elt)
 			var id = tab.uniqueId().attr('id')
-			var li = $('<li>').append($('<a>', {href: '#' + id}).text(title)).appendTo(ul)
+			var li = $('<li>')
+				.attr('title', title)
+				.append($('<a>', {href: '#' + id}).text(title))
+				.appendTo(ul)
 			if (options.removable === true) {
 				li.append($('<span>', {class: 'ui-icon ui-icon-close'}))
 			}			
 
 			elt.tabs('refresh')
+			return idx
+		}
+
+		this.getTabCount = function() {
+			return ul.children(`li`).length
+		}
+
+		this.getTabPanelByTitle = function (title) {
+
+			return elt.children(`div[title=${title}]`)
+
+		}
+
+		this.getTabIndexByTitle = function (title) {
+
+			return ul.children(`li[title=${title}]`).index()
+
+		}
+
+		this.getTitleByIndex = function(index) {
+			return ul.children('li').eq(index).attr('title')
 		}
 
 		this.getSelectedTabIndex = function() {
@@ -59,6 +98,10 @@ $$.registerControlEx('TabControl', {
 		this.setActive = function(tabIndex) {
 			elt.tabs('option', 'active', tabIndex)
 		}
+
+		this.getActive = function(tabIndex) {
+			return elt.tabs('option', 'active')
+		}		
 
 	}
 });

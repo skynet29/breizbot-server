@@ -2,5 +2,6 @@
 	"tileIcon": "fa fa-comments fa-2x",
 	"tileName": "Message",
 	"tileColor": "w3-red",
-	"title": "Tchat Message"
+	"title": "Tchat Message",
+	"scripts": ["/controls/ui.js"]
 }

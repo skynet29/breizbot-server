@@ -24,7 +24,7 @@ $$.registerControlEx('HeaderControl', {
 					var notif = $(this).closest('li').data('notif')
 					console.log('onAccept', notif)
 
-					http.post('/api/notif/accept/' + notif.from)
+					http.post('/api/invit/accept/' + notif.from)
 
 					http.delete('/api/notif/' + notif.id)
 

@@ -1,8 +1,8 @@
 <div style="display: flex; flex-direction: column;">
 	<h1 class="w3-center">Friends</h1>
 	<div class="scrollPanel">
-		<div bn-each="f of friends">
-			<div class="item">
+		<div bn-each="f of friends" bn-event="click.name: onItemClicked">
+			<div class="item" bn-data="info: f">
 				<div class="name">
 					<span bn-text="f.name"></span>
 				</div>

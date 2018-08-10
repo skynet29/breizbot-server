@@ -107,6 +107,10 @@ tr.bn-middle > td {
 	flex-wrap: wrap;
 }
 
+.bn-toolbar > button {
+	margin-right: 5px;
+}
+
 .bn-toolbar .button {
 	border: 2px solid white;
 	border-radius: 50%;
