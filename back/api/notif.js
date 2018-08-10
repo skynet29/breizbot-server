@@ -45,6 +45,17 @@ routes.post('/accept/:from', function(req, res) {
 
 })
 
+routes.post('/message', function(req, res) {
+	var userName = req.session.user
+	var to = req.body.to
+	var text = req.body.text
+
+	wss.sendMessage(userName, to, text)
+
+	res.sendStatus(200)
+
+})
+
 
 module.exports = routes
 

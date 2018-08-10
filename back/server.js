@@ -69,6 +69,8 @@ function dbReady() {
 	app.use('/api/file', require('./api/file'))
 	app.use('/api/notif', require('./api/notif'))
 	app.use('/api/app', require('./api/app'))
+	app.use('/api/invit', require('./api/invit'))
+	app.use('/api/tchat', require('./api/tchat'))
 
 
 

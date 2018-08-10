@@ -104,6 +104,13 @@ function sendNotification(userName, notif) {
 
 }
 
+function sendMessage(from, to, text) {
+	console.log('sendMessage', from, to, text)
+
+	var broker = getBroker(to)
+	broker.sendMessage('masterMessage', {from, to, text})
+}
+
 function removeNotification(userName, notifId) {
 	console.log('removeNotification', userName, notifId)
 	return usersModel.getUserInfo(userName).then((userInfo) => {
@@ -181,5 +188,6 @@ module.exports = {
 	sendNotification,
 	removeNotification,
 	acceptInvit,
-	publishFriends
+	publishFriends,
+	sendMessage
 }
