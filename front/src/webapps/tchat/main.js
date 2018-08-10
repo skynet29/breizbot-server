@@ -16,7 +16,7 @@ $$.registerControlEx('MainControl', {
 			if (panel.length == 0) {
 				var idx = tabCtrl.addTab(data.from, {
 					removable: true,
-					template: `<p>${data.text}</p>`
+					template: `<p class="w3-right-align">${data.text}</p>`
 				})
 
 				if (tabCtrl.getTabCount() == 1) {
@@ -26,11 +26,22 @@ $$.registerControlEx('MainControl', {
 				
 			}
 			else {
-				panel.append(`<p>${data.text}</p>`)
+				addMessage(panel, data.text)
 			}
 
 			console.log('panel', panel)
 		})
+
+		function addMessage(panel, text, isOwner) {
+			console.log('addMessage', text, isOwner)
+			if (isOwner === true) {
+				panel.append(`<p>${text}</p>`)
+			}
+			else {
+				panel.append(`<p class="w3-right-align">${text}</p>`)
+			} 
+				
+		}
 
 		var ctrl = $$.viewController(elt, {
 			template: {gulp_inject: './main.html'},
@@ -38,6 +49,11 @@ $$.registerControlEx('MainControl', {
 			events: {
 				onFriendSelected: function(ev, data) {
 					console.log('onFriendSelected', data)
+					if (!data.isConnected) {
+						$$.showAlert(`User '${data.name}' is not connected`)
+						return
+					}
+
 					var tabCtrl = ctrl.scope.tabCtrl
 
 					var idx = tabCtrl.getTabIndexByTitle(data.name)
@@ -88,20 +104,25 @@ $$.registerControlEx('MainControl', {
 					var tabIdx = tabCtrl.getActive()
 					console.log('tabIdx', tabIdx)
 
-					var userName = tabCtrl.getTitleByIndex(tabIdx)
-					console.log('userName', userName)
-					if (userName == undefined) {
+					var dest = tabCtrl.getTitleByIndex(tabIdx)
+					console.log('dest', dest)
+					if (dest == undefined) {
 						$$.showAlert('Please select a user first')
 						return
 
 					}
 
+
+
 					var data = $(this).getFormData()
 					console.log('data', data)
 
 					$(this).resetForm()
+			
+					var panel = tabCtrl.getTabPanelByTitle(dest)
+					addMessage(panel, data.message, true)
 
-					http.post('/api/tchat/send/' + userName, {
+					http.post('/api/tchat/send/' + dest, {
 						text: data.message
 					}).catch((e) => {
 						//console.log('Error', e)

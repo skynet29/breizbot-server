@@ -44,7 +44,7 @@ $$.registerControlEx('TabControl', {
 			var idx = getCount()
 			options = options || {}
 			var tab = $('<div>')
-				.html(options.template)
+				.append(options.template)
 				.css('flex', '1')
 				.attr('title', title)
 				.appendTo(elt)
