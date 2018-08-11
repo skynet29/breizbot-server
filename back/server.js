@@ -10,7 +10,7 @@ var bodyParser = require('body-parser')
 var fileUpload = require('express-fileupload')
 var FileStore = require('session-file-store')(session)
 
-
+require('console-title')('WEB Server')
 
 var sys = require('./lib/sys')
 var wss = require('./lib/wss')
