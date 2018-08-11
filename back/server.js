@@ -8,6 +8,7 @@ var express = require('express')
 var session = require('express-session')
 var bodyParser = require('body-parser')
 var fileUpload = require('express-fileupload')
+var FileStore = require('session-file-store')(session)
 
 
 
@@ -37,7 +38,7 @@ function dbReady() {
 	app.use(session({
 		secret: 'keyboard cat',
 		//store: store,
-		//store: new FileStore({path: path.join(__dirname, '/config/sessions')}),
+		store: new FileStore({path: path.join(__dirname, '/config/sessions')}),
 		resave: true,
 		saveUninitialized: true,
 		cookie: {maxAge: null}
@@ -53,7 +54,7 @@ function dbReady() {
 
 	// forbid acces to REST API when no user connected
 	app.all('/api/*' , function(req, res, next) {
-		console.log('url', req.url)
+		//console.log('url', req.url)
 		if (!req.session.connected) {
 			res.sendStatus('401')
 		}
