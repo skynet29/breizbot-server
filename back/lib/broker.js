@@ -17,7 +17,7 @@ class Broker {
 	isAppConnected(appType, appName) {
 		for(var client in this.clients) {
 			var f = client.split('.')
-			if (appType == f[0] && appName == f[2]) {
+			if (appType == f[0] && appName == f[1]) {
 				return true
 			}
 
