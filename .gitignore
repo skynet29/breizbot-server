@@ -1,7 +1,9 @@
 node_modules
 back/config/certif
+back/config/sessions
 back/config/users.json
 back/config/users/*
+
 
 
 
