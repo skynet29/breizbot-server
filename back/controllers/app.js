@@ -1,7 +1,7 @@
 var sys = require('../lib/sys')
 
 function filterFileNames(fileNames, appPath) {
-	console.log('filterFileNames', fileNames, appPath)
+	//console.log('filterFileNames', fileNames, appPath)
 	return fileNames
 	.filter(function(fileName) {
 		return typeof fileName == 'string'
@@ -12,7 +12,7 @@ function filterFileNames(fileNames, appPath) {
 }
 
 function renderApp(appName, user, res) {
-	console.log('renderApp')
+	//console.log('renderApp')
 	var appPath = `/webapps/${appName}/`
 	var data = {
 		scripts: [appPath + 'app.js'],
@@ -23,18 +23,18 @@ function renderApp(appName, user, res) {
 	}
 
 	sys.getAppProps(appName).then(function(props) {
-		console.log('props', props)
+		//console.log('props', props)
 		if (typeof props.title == 'string') {
 			data.title = props.title
 		}
 		if (Array.isArray(props.scripts)) {
 			var scripts = filterFileNames(props.scripts, appPath)
-			console.log('scripts', scripts)
+			//console.log('scripts', scripts)
 			data.scripts = scripts.concat(data.scripts)
 		}
 		if (Array.isArray(props.styles)) {
 			var styles = filterFileNames(props.styles, appPath)
-			console.log('styles', styles)
+			//console.log('styles', styles)
 			data.styles = styles
 		}
 		if (typeof props.log == 'boolean') {
@@ -43,7 +43,7 @@ function renderApp(appName, user, res) {
 
 		
 		res.render('app', data)
-		console.log('renderApp OK')
+		//console.log('renderApp OK')
 	})
 
 }
@@ -52,7 +52,7 @@ function renderApp(appName, user, res) {
 module.exports = function(app) {
 
 	app.get('/apps/:app', function(req, res, next) {
-		console.log('requestedApp', req.params, req.path)
+		//console.log('requestedApp', req.params, req.path)
 		if (req.session.connected) {
 			var requestedApp = req.params.app
 

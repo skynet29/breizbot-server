@@ -34,11 +34,13 @@ function dbReady() {
 
 	var app = express()	
 
+	var store = new FileStore({path: path.join(__dirname, '/config/sessions')})
+
 
 	app.use(session({
 		secret: 'keyboard cat',
 		//store: store,
-		store: new FileStore({path: path.join(__dirname, '/config/sessions')}),
+		store,
 		resave: true,
 		saveUninitialized: true,
 		cookie: {maxAge: null}
@@ -101,7 +103,7 @@ function dbReady() {
 	var server = https.createServer(greenlock.tlsOptions, app).listen(8443)
 
 	
-	wss.init(greenlock.tlsOptions)
+	wss.init(greenlock.tlsOptions, store)
 
 }
 

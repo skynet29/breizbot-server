@@ -35,13 +35,13 @@ module.exports =  {
 
 	getUserList: function() {
 
-		console.log('getUserList')
+		//console.log('getUserList')
 		return Promise.resolve(Object.keys(users))
 	},
 
 	getUserInfo: function(userName) {
 
-		console.log('getUserInfo', userName)
+		//console.log('getUserInfo', userName)
 		var info = users[userName]
 		if (info == undefined) {
 			return Promise.reject(`Unknown user '${userName}'`)
@@ -53,7 +53,7 @@ module.exports =  {
 
 	updateUserInfo: function(userName, data) {
 
-		console.log(`updateUserInfo`, userName, data)
+		//console.log(`updateUserInfo`, userName, data)
 
 		if (users[userName]) {
 			Object.assign(users[userName], data)
@@ -68,7 +68,7 @@ module.exports =  {
 
 	createUser: function(userName) {
 
-		console.log(`createUser`, userName)
+		//console.log(`createUser`, userName)
 		if (users[userName]) {
 			
 			return Promise.reject('user already created')
@@ -82,7 +82,7 @@ module.exports =  {
 
 	deleteUser: function(userName) {
 
-		console.log(`deleteUser`, userName)
+		//console.log(`deleteUser`, userName)
 
 		if (users[userName]) {
 			delete users[userName]

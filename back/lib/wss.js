@@ -2,15 +2,19 @@ const ws = require("nodejs-websocket")
 const usersModel = require('./usersModel')
 const uniqid = require('uniqid')
 const colors = require('colors')
+var auth = require('basic-auth')
+var cookie = require('cookie')
 
 var Broker = require('./broker')
 
 var brokers = {}
 
-function init(options) {
+function init(options, store) {
 	options.secure = true
 
-	const wss = ws.createServer(options, onConnect)
+	const wss = ws.createServer(options, function(client) {
+		onConnect(client, store)
+	})
 
 	wss.listen(8090, () => {
 		console.log(`WebSocket server start listening on port 8090`)
@@ -25,7 +29,17 @@ function getBroker(userName) {
 	return broker	
 }
 
-function onConnect(client) {
+function sendError(client, text) {
+	console.log('sendError', text)
+	var msg = {
+		type: 'notif',
+		topic: 'masterError',
+		data: text
+	}
+	client.sendText(JSON.stringify(msg))
+}
+
+function onConnect(client, store) {
 	
 
 	var id = client.path.substr(1)
@@ -33,14 +47,91 @@ function onConnect(client) {
 	console.log(`New connection ${id}`.green)
 
 	var f = id.split('.')
-	if (f.length < 3) {
-		client.sendText('Bad URL')
-		client.close()
+	if (f.length < 2) {
+		sendError(client, 'Bad URL')
 		return
 	}
-	var userName = f[1]
-	var appName = f[2]
-	var appType = f[0]
+	var [appType, appName] = f
+
+	var headers = client.headers
+
+	//console.log('Headers', client.headers)
+	if (appType === 'box') {
+		var authorization = headers.authorization
+		if (authorization == undefined) {
+			sendError(client, 'Missing authorization')
+			return
+		}		
+
+		var credentials = auth.parse(headers.authorization)
+		console.log('credentials', credentials)
+		var userName = credentials.name
+		usersModel.getUserInfo(userName)
+		.then((userInfo) => {
+			var pwd = userInfo.pwd
+			if (pwd === credentials.pass) {
+				addClient(userName, id, client)
+			}
+			else {
+				sendError(client, 'Bad password')
+			}
+		})
+		.catch((e) => {			
+			sendError(client, e)
+		})
+	}
+
+	else if (appType === 'hmi') {
+
+		if (headers.origin !== 'https://com.breizbot.ovh') {
+			sendError(client, 'Bad origin')
+			return
+		}
+
+		if (headers.cookie == undefined) {
+			sendError(client, 'Missing cookie')
+			return
+		}
+
+
+		var cookies = cookie.parse(headers.cookie)
+		//console.log('cookies', cookies)
+		
+		var sid = cookies['connect.sid']
+		if (sid == undefined) {
+			sendError(client, 'Missing sid')
+		}
+
+
+
+		sid = sid.split(/[:.]+/)[1]
+		console.log('sid', sid)
+
+		store.get(sid, function(err, session) {
+			console.log('err', err)
+			//console.log('session', session)
+			if (err != null) {
+				sendError(client, 'Unknown session')
+				return
+			}
+			var userName = session.user
+			addClient(userName, id, client)
+
+		})
+
+
+
+	}
+	else {
+		sendError(client, 'Unknown appType')
+	}
+}
+
+function addClient(userName, id, client) {
+
+	console.log('addClient', userName, id)
+
+	var [appType, appName] = id.split('.')
 
 	var broker = getBroker(userName)
 
@@ -78,7 +169,7 @@ function onConnect(client) {
 			})
 			
 		})	
-	}
+	}	
 
 }
 

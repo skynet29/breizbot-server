@@ -240,7 +240,7 @@
 
 	$$.registerService('WebSocketService', function(config) {
 
-		var id = `hmi.${config.userName}.${config.appName}.` +  (Date.now() % 100000)
+		var id = `hmi.${config.appName}.` +  (Date.now() % 100000)
 
 		console.log('id', id)
 

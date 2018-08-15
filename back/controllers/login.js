@@ -1,15 +1,16 @@
 var usersModel = require('../lib/usersModel')
 var wss = require('../lib/wss')
+const colors = require('colors')
 
 module.exports = function(app) {
 
 	app.post('/connect', function(req, res) {
-		console.log('connect', req.body, req.path)
+		//console.log('connect', req.body, req.path)
 		var user = req.body.user
 
 		usersModel.getUserInfo(user).then((userInfo) => {
 
-			console.log('userInfo', userInfo)
+			//console.log('userInfo', userInfo)
 			if (userInfo == null) {
 				res.render('login', {message: 'Unknown user', user:''})
 			}
@@ -20,7 +21,7 @@ module.exports = function(app) {
 			else {
 
 				req.session.connected = true
-				console.log(`user '${user}' connected with IP:${req.ip}`)
+				console.log(`user '${user}' connected with IP:${req.ip}`.blue)
 
 				req.session.allowedApps = userInfo.allowedApps
 
@@ -42,7 +43,8 @@ module.exports = function(app) {
 	})
 
 	app.get('/disconnect', function(req, res) {
-		console.log('disconnect')
+		var user = req.session.user
+		console.log(`user '${user}' disconnected`.blue)
 /*		delete connectedUsers[req.session.user]
 */		req.session.connected = false
 		req.session.destroy()

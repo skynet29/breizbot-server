@@ -6,9 +6,9 @@ var routes = require('express').Router()
 
 routes.get('/', function(req, res) {
 
-	console.log('getUserList')
+	//console.log('getUserList')
 	usersModel.getUserList().then((docs) => {
-		console.log('docs', docs)
+		//console.log('docs', docs)
 		res.json(docs)
 	})
 	.catch(() => {
@@ -22,7 +22,7 @@ routes.get('/:userName', function(req, res) {
 	var userName = req.params.userName
 
 	usersModel.getUserInfo(userName).then((doc) => {
-		console.log('doc', doc)
+		//console.log('doc', doc)
 		res.json(doc)
 	})	
 	.catch(() => {
