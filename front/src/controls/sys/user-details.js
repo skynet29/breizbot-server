@@ -3,10 +3,10 @@
 
 	$$.registerControlEx('UserDetailsControl', {
 
-		deps: ['HttpService'],
+		deps: ['AppService', 'UsersService'],
 		iface: 'setUser(userName);getUser()',
 
-		init: function(elt, options, http) {
+		init: function(elt, options, appSrv, usersSrv) {
 
 			var ctrl = $$.viewController(elt, {
 				template: {gulp_inject: './user-details.html'},
@@ -16,7 +16,7 @@
 				events: {
 					onApply: function(ev) {
 						console.log('Apply', getInfos())
-						http.put(`/api/users/${user}`, getInfos()).then(() => {
+						usersSrv.update(user, getInfos()).then(() => {
 							$(this).notify('Config saved successfully', {position: 'right top', className: 'success'})
 						})					
 					}
@@ -31,7 +31,7 @@
 
 
 
-			http.get('/api/app').then(function(apps) {
+			appSrv.list().then(function(apps) {
 				_apps = apps
 
 			})
@@ -63,7 +63,7 @@
 			}
 
 			function getUserDetails(user) {
-				http.get(`/api/users/${user}`).then(function(userDetails) {
+				usersSrv.get(user).then(function(userDetails) {
 
 					console.log('userDetails', userDetails)
 

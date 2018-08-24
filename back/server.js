@@ -83,6 +83,7 @@ function dbReady() {
 	require('./controllers/home')(app)
 	require('./controllers/login')(app)
 
+	app.use('/externals', express.static(path.join(__dirname, '../front/externals')))
 	app.use(express.static(path.join(__dirname, '../front/dist')))
 
 

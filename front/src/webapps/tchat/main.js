@@ -1,7 +1,7 @@
 $$.registerControlEx('MainControl', {
-	deps: ['WebSocketService', 'HttpService', 'UserService'],
+	deps: ['WebSocketService', 'TchatService', 'UserService', 'NotifService'],
 	
-	init: function(elt, options, client, http, usrSrv) {
+	init: function(elt, options, client, tchatSrv, usrSrv, notifSrv) {
 
 		var userName = usrSrv.getName()
 		console.log('userName', userName)
@@ -86,11 +86,7 @@ $$.registerControlEx('MainControl', {
 						return
 					}
 
-					http.post('/api/notif/' + data.userName, {
-						type: 'invit',
-						message: `User <strong>${userName}</strong> want to be your friend`,
-						from: userName
-					}).catch((e) => {
+					notifSrv.sendInvit(data.userName, userName).catch((e) => {
 						//console.log('Error', e)
 						$$.showAlert(e.responseText)
 					})
@@ -122,9 +118,7 @@ $$.registerControlEx('MainControl', {
 					var panel = tabCtrl.getTabPanelByTitle(dest)
 					addMessage(panel, data.message, true)
 
-					http.post('/api/tchat/send/' + dest, {
-						text: data.message
-					}).catch((e) => {
+					tchatSrv.sendText(dest, data.message).catch((e) => {
 						//console.log('Error', e)
 						$$.showAlert(e.responseText)
 					})

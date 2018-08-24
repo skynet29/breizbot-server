@@ -1,12 +1,12 @@
 
 $$.registerControlEx('HeaderControl', {
-	deps: ['WebSocketService', 'HttpService'],
+	deps: ['WebSocketService', 'InvitService', 'NotifService'],
 	options: {
 		title: 'Hello World',
 		userName: 'unknown',
 		isHomePage: false
 	},
-	init: function(elt, options, client, http) {
+	init: function(elt, options, client, invitSrv, notifSrv) {
 
 		var dlgCtrl = $$.dialogController('Notifications', {
 			template: {gulp_inject: './headerNotif.html'},
@@ -18,22 +18,22 @@ $$.registerControlEx('HeaderControl', {
 				onDelete: function() {
 					var notif = $(this).closest('li').data('notif')
 					//console.log('onDelete', notif)
-					http.delete('/api/notif/' + notif.id)
+					notifSrv.delete(notif.id)
 				},
 				onAccept: function() {
 					var notif = $(this).closest('li').data('notif')
 					console.log('onAccept', notif)
 
-					http.post('/api/invit/accept/' + notif.from)
+					invitSrv.accept(notif.from)
 
-					http.delete('/api/notif/' + notif.id)
+					notifSrv.delete(notif.id)
 
 				},
 				onDeny: function() {
 					var notif = $(this).closest('li').data('notif')
 					console.log('onDeny', notif)
 
-					http.delete('/api/notif/' + notif.id)
+					notifSrv.delete(notif.id)
 
 				}
 			}

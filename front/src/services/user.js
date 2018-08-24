@@ -4,7 +4,7 @@ $$.registerService('UserService', function(config) {
 
 
 	return {
-		getName() {
+		getName: function() {
 			return config.userName
 		}
 

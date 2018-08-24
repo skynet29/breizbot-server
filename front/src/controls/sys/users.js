@@ -1,8 +1,8 @@
 
 $$.registerControlEx('UsersControl', {
-	deps: ['HttpService'],
+	deps: ['NotifService', 'UsersService'],
 	events: 'userSelected,userDeleted',
-	init: function(elt, options, http) {
+	init: function(elt, options, notifSrv, usersSrv) {
 
 		var events = new EventEmitter2()
 
@@ -17,7 +17,7 @@ $$.registerControlEx('UsersControl', {
 					var data = $(this).getFormData()
 					$(this).get(0).reset()
 					//console.log('submit', data)
-					http.post('/api/users', data)
+					usersSrv.add(data)
 					.then(loadUsers)
 					.catch((e) => {
 						//console.log('Error', e)
@@ -29,7 +29,7 @@ $$.registerControlEx('UsersControl', {
 					var user = $(this).closest('li').data('user')
 					//console.log('user', user)
 					$$.showConfirm('Are your sure ?', 'Information', function() {
-						http.delete(`/api/users/${user}`).then(function() {
+						usersSrv.remove(user).then(function() {
 							loadUsers()
 							events.emit('userDeleted', user)
 						})				
@@ -55,7 +55,7 @@ $$.registerControlEx('UsersControl', {
 							message
 						}
 
-						http.post('/api/notif/' + user, data).then((resp) => {
+						notifSrv.send(user, data).then((resp) => {
 							console.log('resp', resp)
 						})
 					})
@@ -65,7 +65,7 @@ $$.registerControlEx('UsersControl', {
 
 
 		function loadUsers() {
-			http.get('/api/users').then(function(users) {
+			usersSrv.list().then(function(users) {
 				console.log('loadUsers', users)
 				ctrl.setData({users: users})
 			})			

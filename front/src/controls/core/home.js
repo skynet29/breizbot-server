@@ -1,7 +1,7 @@
 $$.registerControlEx('HomeControl', {
-	deps: ['HttpService'],
+	deps: ['AppService'],
 
-	init: function(elt, options, http) {
+	init: function(elt, options, appSrv) {
 
 		var ctrl = $$.viewController(elt, {
 			template: {gulp_inject: "./home.html"},
@@ -12,7 +12,7 @@ $$.registerControlEx('HomeControl', {
 
 		})
 
-		http.get('/api/app/webapps').then((appInfos) => {
+		appSrv.getUserAppsInfo().then((appInfos) => {
 			//console.log('appInfos', appInfos)
 
 			var apps = []
