@@ -574,6 +574,9 @@
             ]
         }
     },
+    "tplink": {
+        "props": {}
+    },
     "users": {
         "props": {
             "styles": [

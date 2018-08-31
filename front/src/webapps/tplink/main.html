@@ -1,0 +1,27 @@
+
+
+<div class="scrollPanel">
+    <table class="w3-table-all w3-small">
+        <thead>
+            <tr class="w3-green">
+                <th>Alias</th>
+                <th>Type</th>
+                <th>State</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody bn-each="dev of devices" bn-event="click.action: onAction">
+  			<tr bn-data="item: dev">
+				<td bn-text="dev.alias"></td>
+				<td bn-text="dev.type"></td>
+				<td bn-text="dev.state"></td>
+				<td>
+					<button class="action" data-action="on">On</button>
+					<button class="action" data-action="off">Off</button>
+				</td>
+			</tr>      	
+
+        </tbody>
+    </table>
+</div>
+
