@@ -1,7 +1,7 @@
 
 
 <div class="scrollPanel">
-    <table class="w3-table-all w3-small">
+    <table class="w3-table-all w3-centered">
         <thead>
             <tr class="w3-green">
                 <th>Alias</th>
@@ -15,9 +15,8 @@
 				<td bn-text="dev.alias"></td>
 				<td bn-text="dev.type"></td>
 				<td bn-text="dev.state"></td>
-				<td>
-					<button class="action" data-action="on">On</button>
-					<button class="action" data-action="off">Off</button>
+				<td bn-each="a of dev.actions">
+					<button class="action w3-btn w3-blue w3-margin-right" bn-data="action: a.cmd" bn-text="a.label"></button>
 				</td>
 			</tr>      	
 
