@@ -1,4 +1,4 @@
-$$.showForm = function(formDesc, data, onApply) {
+$$.showForm = function(formDesc, onApply) {
 	//console.log('showForm', formDesc)
 
 	var div = $('<div>', {title: formDesc.title})
@@ -32,6 +32,10 @@ $$.showForm = function(formDesc, data, onApply) {
 				.prop('required', true)
 				.appendTo(divField)
 		}
+	}
+
+	if (formDesc.data != undefined) {
+		form.setFormData(formDesc.data)
 	}
 
 	div.dialog({

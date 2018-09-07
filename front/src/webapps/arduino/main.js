@@ -21,7 +21,7 @@ $$.registerControlEx('MainControl', {
 						$$.showForm({
 							fields: args,
 							title: label
-						}, {}, function(data) {
+						}, function(data) {
 							//console.log('data', data)
 							client.emit('arduino.action.' + deviceId, {action, args: data})
 						})
