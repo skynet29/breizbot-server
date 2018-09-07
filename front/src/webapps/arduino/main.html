@@ -1,7 +1,28 @@
-<div>
-	<h1>Arduino</h1>
+<div class="scrollPanel">
+    <table class="w3-table-all w3-centered">
+        <thead>
+            <tr class="w3-green">
+                <th>Alias</th>
+                <th>Type</th>
+                <th>Properties</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody bn-each="dev of devices" bn-event="click.action: onAction">
+  			<tr bn-data="item: dev">
+				<td bn-text="dev.alias"></td>
+				<td bn-text="dev.type"></td>
+				<td bn-each="prop of dev.properties">
+					<div>
+						<span bn-text="prop.label"></span>:
+						<span bn-text="prop.value"></span>
+					</div>
+				</td>
+				<td bn-each="a of dev.actions">
+					<button class="action w3-btn w3-blue w3-margin-right" bn-data="action: a.cmd" bn-text="a.label"></button>
+				</td>
+			</tr>      	
 
-	<button class="w3-button w3-blue" bn-event="click: onOn">ON</button>
-	<button class="w3-button w3-blue" bn-event="click: onOff">OFF</button>
-
+        </tbody>
+    </table>
 </div>
