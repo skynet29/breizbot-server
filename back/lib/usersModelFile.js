@@ -50,6 +50,16 @@ module.exports =  {
 		return Promise.resolve(info)
 	},
 
+	findUser: function(alexaUserId) {
+		for(var user in users) {
+			if (users[user].alexaUserId === alexaUserId) {
+				return Promise.resolve(user)
+			}
+		}
+
+		return Promise.reject('No user found')
+	},
+
 
 	updateUserInfo: function(userName, data) {
 

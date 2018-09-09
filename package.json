@@ -13,6 +13,7 @@
   "author": "Marc DELOMEZ",
   "license": "ISC",
   "dependencies": {
+    "alexa-app": "^4.2.2",
     "basic-auth": "^2.0.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.3",

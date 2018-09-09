@@ -110,7 +110,7 @@ function onConnect(client, store) {
 		store.get(sid, function(err, session) {
 			console.log('err', err)
 			//console.log('session', session)
-			if (err != null) {
+			if (err != null || session == null) {
 				sendError(client, 'Unknown session')
 				return
 			}
@@ -195,11 +195,23 @@ function sendNotification(userName, notif) {
 
 }
 
+function sendTopic(user, topic, data) {
+	console.log('sendTopic', user, topic, data)
+
+	var broker = getBroker(user)
+	broker.sendMessage(topic, data)
+
+}
+
 function sendMessage(from, to, text) {
 	console.log('sendMessage', from, to, text)
 
-	var broker = getBroker(to)
-	broker.sendMessage('masterMessage', {from, to, text})
+	sendTopic(to, 'masterMessage', {from, to, text})
+
+}
+function callService(user, serviceName, data) {
+	var broker = getBroker(user)
+	return broker.callService(serviceName, data)
 }
 
 function removeNotification(userName, notifId) {
@@ -280,5 +292,7 @@ module.exports = {
 	removeNotification,
 	acceptInvit,
 	publishFriends,
-	sendMessage
+	sendMessage,
+	sendTopic,
+	callService
 }

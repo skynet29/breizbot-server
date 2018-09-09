@@ -10,6 +10,7 @@ var bodyParser = require('body-parser')
 var fileUpload = require('express-fileupload')
 var FileStore = require('session-file-store')(session)
 
+
 require('console-title')('WEB Server')
 
 var sys = require('./lib/sys')
@@ -34,6 +35,8 @@ function dbReady() {
 
 	var app = express()	
 
+	require('./controllers/alexa')(app)
+
 	var store = new FileStore({path: path.join(__dirname, '/config/sessions')})
 
 
@@ -56,7 +59,6 @@ function dbReady() {
 
 	// forbid acces to REST API when no user connected
 	app.all('/api/*' , function(req, res, next) {
-		//console.log('url', req.url)
 		if (!req.session.connected) {
 			res.sendStatus('401')
 		}

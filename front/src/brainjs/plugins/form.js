@@ -60,9 +60,7 @@
 
 		for(var name in data) {
 			var value = data[name]
-			console.log('for', name, value)
 			var elt = this.find(`[name=${name}]`)
-			console.log('elt', elt.length)
 			if (elt.length) {
 				elt.setValue(value)				
 			}
