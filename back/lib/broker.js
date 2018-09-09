@@ -1,5 +1,17 @@
 const EventEmitter2 = require('eventemitter2').EventEmitter2
 
+var statusCodeMap = {
+	0: 'OK',
+	100: 'Service not available',
+	200: 'Invalid parameters',
+	201: 'Not found'
+}
+
+function getErrorMessage(statusCode) {
+	return statusCodeMap[statusCode] || ''
+}
+
+
 
 function sendMsg(client, msg) {
 		//console.log('sendMsg', msg.topic)
@@ -12,6 +24,8 @@ class Broker {
 		this.notifHistory = {}
 
 		this.clients = {}
+
+		this.services = new EventEmitter2()
 	}
 
 	isAppConnected(appType, appName) {
@@ -106,9 +120,14 @@ class Broker {
 			case 'cmd': 
 			case 'callServiceResp':
 				//console.log('msg', msg)
-				let dest = this.findClient(msg.dest)
-				if (dest != undefined) {
-					sendMsg(dest, msg)
+				if (msg.dest == 'master') {
+					this.services.emit(msg.srvName, msg)
+				} else {
+					let dest = this.findClient(msg.dest)
+					if (dest != undefined) {
+						sendMsg(dest, msg)
+					}
+
 				}
 			break
 
@@ -195,6 +214,38 @@ class Broker {
 		//console.log('status', msg)
 		this.broadcastToSubscribers(msg)		
 	}
+
+	callService(srvName, data) {
+		console.log('callService', srvName, data)
+		return new Promise((resolve, reject) => {
+
+
+			let dest = this.getServiceProvider(srvName)
+			if (dest != undefined) {
+
+				this.services.once(srvName, function(msg) {
+					var statusCode = msg.statusCode
+					if (statusCode == 0) {
+						resolve(msg.data)
+					}
+					else {
+						reject({
+							code: statusCode,
+							message: getErrorMessage(msg.statusCode)
+						})
+					}
+				})
+
+				sendMsg(dest, {src: 'master', type: 'callService', srvName, data})
+			}
+			else {
+				reject({
+					code: 100,
+					message: getErrorMessage(100)
+				})
+			}
+		})
+	}	
 
 	sendStatus() {
 
