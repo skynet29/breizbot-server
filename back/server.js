@@ -10,6 +10,8 @@ var bodyParser = require('body-parser')
 var fileUpload = require('express-fileupload')
 var FileStore = require('session-file-store')(session)
 
+//var alexa = require('alexa-app')
+
 
 require('console-title')('WEB Server')
 
@@ -35,7 +37,9 @@ function dbReady() {
 
 	var app = express()	
 
-	require('./controllers/alexa')(app)
+	var alexaApp = require('./controllers/alexa')
+
+	alexaApp.express({expressApp: app})
 
 	var store = new FileStore({path: path.join(__dirname, '/config/sessions')})
 

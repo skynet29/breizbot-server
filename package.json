@@ -30,6 +30,7 @@
     "redirect-https": "^1.1.5",
     "redis": "^2.8.0",
     "session-file-store": "^1.2.0",
+    "ssml-builder": "^0.4.3",
     "uniqid": "^5.0.3"
   },
   "devDependencies": {

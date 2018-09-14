@@ -1,0 +1,117 @@
+{
+   "interactionModel": {
+      "languageModel": {
+         "intents": [
+            {
+               "name": "SwitchOn",
+               "samples": [
+                  "allume  {deviceName}",
+                  "d'allumer  {deviceName}",
+                  "allume le {deviceName}",
+                  "d'allumer le {deviceName}",
+                  "allume la {deviceName}",
+                  "d'allumer la {deviceName}"
+               ],
+               "slots": [
+                  {
+                     "name": "deviceName",
+                     "type": "DeviceName",
+                     "samples": []
+                  }
+               ]
+            },
+            {
+               "name": "ColorIntent",
+               "samples": [
+                  "allume  {deviceName} en {color}",
+                  "d'allumer  {deviceName} en {color}",
+                  "allume le {deviceName} en {color}",
+                  "d'allumer le {deviceName} en {color}",
+                  "allume la {deviceName} en {color}",
+                  "d'allumer la {deviceName} en {color}"
+               ],
+               "slots": [
+                  {
+                     "name": "deviceName",
+                     "type": "DeviceName",
+                     "samples": []
+                  },
+                  {
+                     "name": "color",
+                     "type": "AMAZON.Color",
+                     "samples": []
+                  }
+               ]
+            },
+            {
+               "name": "DeviceListIntent",
+               "samples": [
+                  "  liste des appareils ",
+                  "donne moi  liste des appareils ",
+                  " la liste des appareils ",
+                  "donne moi la liste des appareils ",
+                  "  liste les appareils ",
+                  "donne moi  liste les appareils ",
+                  " la liste les appareils ",
+                  "donne moi la liste les appareils ",
+                  "  liste des appareils connectés",
+                  "donne moi  liste des appareils connectés",
+                  " la liste des appareils connectés",
+                  "donne moi la liste des appareils connectés",
+                  "  liste les appareils connectés",
+                  "donne moi  liste les appareils connectés",
+                  " la liste les appareils connectés",
+                  "donne moi la liste les appareils connectés"
+               ]
+            },
+            {
+               "name": "SwitchOff",
+               "samples": [
+                  "éteind  {deviceName}",
+                  "d'éteindre  {deviceName}",
+                  "éteind le {deviceName}",
+                  "d'éteindre le {deviceName}",
+                  "éteind la {deviceName}",
+                  "d'éteindre la {deviceName}"
+               ],
+               "slots": [
+                  {
+                     "name": "deviceName",
+                     "type": "DeviceName",
+                     "samples": []
+                  }
+               ]
+            }
+         ],
+         "types": [
+            {
+               "name": "DeviceName",
+               "values": [
+                  {
+                     "id": null,
+                     "name": {
+                        "value": "led rouge",
+                        "synonyms": []
+                     }
+                  },
+                  {
+                     "id": null,
+                     "name": {
+                        "value": "led verte",
+                        "synonyms": []
+                     }
+                  },
+                  {
+                     "id": null,
+                     "name": {
+                        "value": "led couleur",
+                        "synonyms": []
+                     }
+                  }
+               ]
+            }
+         ],
+         "invocationName": "jarvis"
+      }
+   }
+}
